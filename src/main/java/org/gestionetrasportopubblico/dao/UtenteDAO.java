@@ -33,4 +33,26 @@ public class UtenteDAO {
         em.close();
         return utenti;
     }
+
+
+    public void update(Utente utente) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(utente);
+        em.getTransaction().commit();
+        em.close();
+
+    }
+
+    public void delete(UUID id) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Utente utente = em.find(Utente.class, id);
+        if (utente != null) {
+            em.remove(utente);
+        }
+        em.getTransaction().commit();
+        em.close();
+
+    }
 }
