@@ -29,7 +29,6 @@ public class UtenteDAO {
 
     public Utente findById(UUID id) {
         Utente utente = em.find(Utente.class, id);
-        em.close();
         return utente;
     }
 

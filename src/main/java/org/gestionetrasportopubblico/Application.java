@@ -3,10 +3,10 @@ package org.gestionetrasportopubblico;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.gestionetrasportopubblico.dao.TesseraDAO;
-import org.gestionetrasportopubblico.dao.UtenteDAO;
-import org.gestionetrasportopubblico.entities.Tessera;
+import org.gestionetrasportopubblico.dao.*;
+import org.gestionetrasportopubblico.entities.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class Application {
@@ -18,19 +18,24 @@ public class Application {
         EntityManager em = emf.createEntityManager();
         UtenteDAO utenteDAO = new UtenteDAO(em);
         TesseraDAO tesseraDAO = new TesseraDAO(em);
+        AbbonamentoDAO abbonamentoDAO = new AbbonamentoDAO(em);
+        PuntoVenditaDAO puntovenditaDAO = new PuntoVenditaDAO(em);
+        DistributoreAutomaticoDAO distributoreautomaticoDAO = new DistributoreAutomaticoDAO(em);
+        BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
 
         //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
 //        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
 //        tesseraDAO.create(tessera);
 //        System.out.println(tessera);
 
-        Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("24833252-5223-4d1f-8d68-9dcb89e458c6"));
+        Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("c446a62f-784d-46f6-9cbc-29f77b8a486e"));
 
 //---------------------------------------------------------------------------------CREO UTENTI---------------------------------------------------------------------------------
-//        Utente utente = new Utente("Nikita", "Test", tesseraDB);
+//        Utente utente = new Utente("Nikita", "Test", tessera);
 //        utenteDAO.create(utente);
-//
+
 //        System.out.println(utente);
+        Utente utenteDB = utenteDAO.findById(UUID.fromString("cb8eab38-db78-43e1-8cce-38e29143fb59"));
 
 //---------------------------------------------------------------------------------CERCO UTENTI CON UUID---------------------------------------------------------------------------------
 //        Utente daTrovare = utenteDAO.findById(UUID.fromString("828028ab-16c2-4657-9e50-1f5ec8c55c5b"));
@@ -62,7 +67,20 @@ public class Application {
 //        for (Utente u : utenti2) {
 //            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
 //        }
-//---------------------------------------------------------------------------------Emissione Biglietti---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------Distributore Automatico---------------------------------------------------------------------------------
+//        DistributoreAutomatico distributoreautomatico = new DistributoreAutomatico("Torino", true);
+//        distributoreautomaticoDAO.create(distributoreautomatico);
 
+//---------------------------------------------------------------------------------Crea Biglietto------------------------------------------------------------------------------------------
+//        Biglietto biglietto = new Biglietto(LocalDate.now(), null, distributoreautomatico, utenteDB);
+//        bigliettoDAO.create(biglietto);
+
+//---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------
+        PuntoVendita puntovendita = new PuntoVendita("Bar Uno", "Torino");
+        puntovenditaDAO.create(puntovendita);
+
+//---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
+        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.SETTIMANALE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), tesseraDB, utenteDB, puntovendita, null);
+        abbonamentoDAO.create(abbonamento);
     }
 }
