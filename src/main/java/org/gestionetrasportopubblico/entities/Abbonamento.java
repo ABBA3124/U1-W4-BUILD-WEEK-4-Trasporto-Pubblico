@@ -10,6 +10,7 @@ public class Abbonamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String codiceUnivoco;
+    @Enumerated(EnumType.STRING)
     private TipoAbbonamento tipo;
     private LocalDate dataInizio;
     private LocalDate dataFine;

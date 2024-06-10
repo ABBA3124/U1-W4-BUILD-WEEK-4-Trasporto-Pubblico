@@ -1,6 +1,5 @@
 package org.gestionetrasportopubblico;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.UtenteDAO;
@@ -14,17 +13,19 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Start build week");
 
-        EntityManager em = emf.createEntityManager();
-        UtenteDAO utenteDAO = new UtenteDAO(em);
-        Utente utente = new Utente();
-        utente.setNome("luca");
-        utente.setCognome("nardi");
-        utente.setNumeroTessera("123456789");
-        utente.setDataScadenzaTessera(LocalDate.now().plusYears(1));
+        UtenteDAO utenteDAO = new UtenteDAO();
 
+        //crea utente
+        Utente utente = new Utente();
+        utente.setNome("nikita");
+        utente.setCognome("Ivanov");
+        utente.setNumeroTessera("12345678912");
+        utente.setDataScadenzaTessera(LocalDate.now().plusYears(1));
         utenteDAO.create(utente);
 
-        System.out.println(utente + " creato? ");
+
+        System.out.println(utente);
+
 
     }
 }

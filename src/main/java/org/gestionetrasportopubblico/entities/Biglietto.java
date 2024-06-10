@@ -18,30 +18,22 @@ public class Biglietto {
     @JoinColumn(name = "punto_vendita_id")
     private PuntoVendita puntoVendita;
 
+    @ManyToOne
+    @JoinColumn(name = "distributore_automatico_id")
+    private DistributoreAutomatico distributoreAutomatico;
+
     public Biglietto() {
     }
 
-
-    public Biglietto(String codiceUnivoco, LocalDate dataEmissione, PuntoVendita puntoVendita) {
+    public Biglietto(String codiceUnivoco, LocalDate dataEmissione, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico) {
         this.codiceUnivoco = codiceUnivoco;
         this.dataEmissione = dataEmissione;
         this.puntoVendita = puntoVendita;
+        this.distributoreAutomatico = distributoreAutomatico;
     }
 
-    public PuntoVendita getPuntoVendita() {
-        return puntoVendita;
-    }
-
-    public void setPuntoVendita(PuntoVendita puntoVendita) {
-        this.puntoVendita = puntoVendita;
-    }
-
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
-    }
-
-    public void setDataEmissione(LocalDate dataEmissione) {
-        this.dataEmissione = dataEmissione;
+    public Long getId() {
+        return id;
     }
 
     public String getCodiceUnivoco() {
@@ -52,8 +44,28 @@ public class Biglietto {
         this.codiceUnivoco = codiceUnivoco;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public PuntoVendita getPuntoVendita() {
+        return puntoVendita;
+    }
+
+    public void setPuntoVendita(PuntoVendita puntoVendita) {
+        this.puntoVendita = puntoVendita;
+    }
+
+    public DistributoreAutomatico getDistributoreAutomatico() {
+        return distributoreAutomatico;
+    }
+
+    public void setDistributoreAutomatico(DistributoreAutomatico distributoreAutomatico) {
+        this.distributoreAutomatico = distributoreAutomatico;
     }
 
     @Override
@@ -63,6 +75,7 @@ public class Biglietto {
                 ", codiceUnivoco='" + codiceUnivoco + '\'' +
                 ", dataEmissione=" + dataEmissione +
                 ", puntoVendita=" + puntoVendita +
+                ", distributoreAutomatico=" + distributoreAutomatico +
                 '}';
     }
 }
