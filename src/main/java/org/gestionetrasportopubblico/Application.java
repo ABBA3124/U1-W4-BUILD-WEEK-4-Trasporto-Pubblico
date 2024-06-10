@@ -3,9 +3,6 @@ package org.gestionetrasportopubblico;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.UtenteDAO;
-import org.gestionetrasportopubblico.entities.Utente;
-
-import java.util.List;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U1-W4-BUILD-WEEK-4-Trasporto-Pubblico");
@@ -31,11 +28,11 @@ public class Application {
 
 
 //---------------------------------------------------------------------------------CERCO TUTTI GLI UTENTI---------------------------------------------------------------------------------
-        List<Utente> utenti = utenteDAO.findAll();
-        System.out.println("lista trovata");
-        for (Utente u : utenti) {
-            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
-        }
+//        List<Utente> utenti = utenteDAO.findAll();
+//        System.out.println("lista trovata");
+//        for (Utente u : utenti) {
+//            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
+//        }
 
 //---------------------------------------------------------------------------------AGGIORNO UN UTENTE---------------------------------------------------------------------------------
 //        Utente utenteDaAggiornare = utenteDAO.findById(UUID.fromString("cee86cb1-7644-4fe9-ad91-45bbabc7b12d"));
@@ -55,5 +52,7 @@ public class Application {
 //        for (Utente u : utenti2) {
 //            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
 //        }
+//---------------------------------------------------------------------------------Emissione Biglietti---------------------------------------------------------------------------------
+        
     }
 }
