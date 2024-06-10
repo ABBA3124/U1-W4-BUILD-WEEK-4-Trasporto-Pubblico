@@ -4,9 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.*;
-import org.gestionetrasportopubblico.entities.*;
+import org.gestionetrasportopubblico.entities.Tessera;
+import org.gestionetrasportopubblico.entities.Utente;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 public class Application {
@@ -76,11 +76,11 @@ public class Application {
 //        bigliettoDAO.create(biglietto);
 
 //---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------
-        PuntoVendita puntovendita = new PuntoVendita("Bar Uno", "Torino");
-        puntovenditaDAO.create(puntovendita);
+//        PuntoVendita puntovendita = new PuntoVendita("Bar Uno", "Torino");
+//        puntovenditaDAO.create(puntovendita);
 
 //---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
-        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.SETTIMANALE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), tesseraDB, utenteDB, puntovendita, null);
-        abbonamentoDAO.create(abbonamento);
+//        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.SETTIMANALE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), tesseraDB, utenteDB, puntovendita, null);
+//        abbonamentoDAO.create(abbonamento);
     }
 }
