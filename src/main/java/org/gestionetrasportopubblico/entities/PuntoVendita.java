@@ -17,14 +17,15 @@ public class PuntoVendita {
     @OneToMany(mappedBy = "puntoVendita")
     private List<Biglietto> biglietti;
 
+    @OneToMany(mappedBy = "puntoVendita")
+    private List<Abbonamento> abbonamenti;
 
     public PuntoVendita() {
     }
 
-    public PuntoVendita(String nome, String indirizzo, List<Biglietto> biglietti) {
+    public PuntoVendita(String nome, String indirizzo) {
         this.nome = nome;
         this.indirizzo = indirizzo;
-        this.biglietti = biglietti;
     }
 
     public Long getId() {
@@ -51,9 +52,11 @@ public class PuntoVendita {
         return biglietti;
     }
 
-    public void setBiglietti(List<Biglietto> biglietti) {
-        this.biglietti = biglietti;
+
+    public List<Abbonamento> getAbbonamenti() {
+        return abbonamenti;
     }
+
 
     @Override
     public String toString() {

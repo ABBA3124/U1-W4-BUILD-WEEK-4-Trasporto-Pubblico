@@ -1,8 +1,13 @@
 package org.gestionetrasportopubblico;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.gestionetrasportopubblico.dao.TesseraDAO;
 import org.gestionetrasportopubblico.dao.UtenteDAO;
+import org.gestionetrasportopubblico.entities.Tessera;
+
+import java.util.UUID;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U1-W4-BUILD-WEEK-4-Trasporto-Pubblico");
@@ -10,16 +15,21 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Start build week");
 
-        UtenteDAO utenteDAO = new UtenteDAO();
+        EntityManager em = emf.createEntityManager();
+        UtenteDAO utenteDAO = new UtenteDAO(em);
+        TesseraDAO tesseraDAO = new TesseraDAO(em);
+
+        //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
+//        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
+//        tesseraDAO.create(tessera);
+//        System.out.println(tessera);
+
+        Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("24833252-5223-4d1f-8d68-9dcb89e458c6"));
 
 //---------------------------------------------------------------------------------CREO UTENTI---------------------------------------------------------------------------------
-//        Utente utente = new Utente();
-//        utente.setNome("cdfsvfdv");
-//        utente.setCognome("Ivfdvddfvdvfdfvdfv");
-//        utente.setNumeroTessera("4646116514646651");
-//        utente.setDataScadenzaTessera(LocalDate.now().plusYears(5));
+//        Utente utente = new Utente("Nikita", "Test", tesseraDB);
 //        utenteDAO.create(utente);
-
+//
 //        System.out.println(utente);
 
 //---------------------------------------------------------------------------------CERCO UTENTI CON UUID---------------------------------------------------------------------------------
@@ -53,6 +63,6 @@ public class Application {
 //            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
 //        }
 //---------------------------------------------------------------------------------Emissione Biglietti---------------------------------------------------------------------------------
-        
+
     }
 }

@@ -18,13 +18,17 @@ public class DistributoreAutomatico {
     @OneToMany(mappedBy = "distributoreAutomatico")
     private List<Biglietto> biglietti;
 
+    @OneToMany(mappedBy = "distributoreAutomatico")
+    private List<Abbonamento> abbonamenti;
+
     public DistributoreAutomatico() {
     }
 
-    public DistributoreAutomatico(String posizione, boolean attivo, List<Biglietto> biglietti) {
+
+    public DistributoreAutomatico(String posizione, boolean attivo) {
         this.posizione = posizione;
         this.attivo = attivo;
-        this.biglietti = biglietti;
+
     }
 
     public Long getId() {
@@ -51,9 +55,11 @@ public class DistributoreAutomatico {
         return biglietti;
     }
 
-    public void setBiglietti(List<Biglietto> biglietti) {
-        this.biglietti = biglietti;
+
+    public List<Abbonamento> getAbbonamenti() {
+        return abbonamenti;
     }
+
 
     @Override
     public String toString() {

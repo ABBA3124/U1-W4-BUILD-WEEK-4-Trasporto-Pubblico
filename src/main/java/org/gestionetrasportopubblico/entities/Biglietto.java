@@ -21,15 +21,19 @@ public class Biglietto {
     @JoinColumn(name = "distributore_automatico_id")
     private DistributoreAutomatico distributoreAutomatico;
 
+    @ManyToOne
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
+
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico) {
+    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico, Utente utente) {
         this.dataEmissione = dataEmissione;
         this.puntoVendita = puntoVendita;
         this.distributoreAutomatico = distributoreAutomatico;
+        this.utente = utente;
     }
-
 
     public Long getCodiceUnivoco() {
         return codiceUnivoco;
@@ -60,6 +64,14 @@ public class Biglietto {
         this.distributoreAutomatico = distributoreAutomatico;
     }
 
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
     @Override
     public String toString() {
         return "Biglietto{" +
@@ -67,6 +79,7 @@ public class Biglietto {
                 ", dataEmissione=" + dataEmissione +
                 ", puntoVendita=" + puntoVendita +
                 ", distributoreAutomatico=" + distributoreAutomatico +
+                ", utente=" + utente +
                 '}';
     }
 }

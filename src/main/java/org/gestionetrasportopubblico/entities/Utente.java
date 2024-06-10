@@ -1,41 +1,32 @@
 package org.gestionetrasportopubblico.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class Utente {
+    @OneToMany(mappedBy = "utente")
+    List<Biglietto> listaBiglietti;
+    @OneToMany(mappedBy = "utente")
+    List<Abbonamento> listaAbbonamenti;
     @Id
     @GeneratedValue
     private UUID id;
     private String nome;
     private String cognome;
-    private String numeroTessera;
-    private LocalDate dataScadenzaTessera;
-
-
-    @OneToMany(mappedBy = "utente")
-    //abbonamenti
-    private List<Abbonamento> abbonamenti;
-
+    @OneToOne(mappedBy = "utente")
+    private Tessera numeroTessera;
 
     public Utente() {
     }
 
-
-    public Utente(String nome, String cognome, String numeroTessera, LocalDate dataScadenzaTessera, List<Abbonamento> abbonamenti) {
+    public Utente(String nome, String cognome, Tessera numeroTessera) {
         this.nome = nome;
         this.cognome = cognome;
         this.numeroTessera = numeroTessera;
-        this.dataScadenzaTessera = dataScadenzaTessera;
-        this.abbonamenti = abbonamenti;
     }
 
     public UUID getId() {
@@ -58,29 +49,18 @@ public class Utente {
         this.cognome = cognome;
     }
 
-    public String getNumeroTessera() {
+    public Tessera getNumeroTessera() {
         return numeroTessera;
     }
 
-    public void setNumeroTessera(String numeroTessera) {
-        this.numeroTessera = numeroTessera;
+    public List<Biglietto> getListaBiglietti() {
+        return listaBiglietti;
     }
 
-    public LocalDate getDataScadenzaTessera() {
-        return dataScadenzaTessera;
+    public List<Abbonamento> getListaAbbonamenti() {
+        return listaAbbonamenti;
     }
 
-    public void setDataScadenzaTessera(LocalDate dataScadenzaTessera) {
-        this.dataScadenzaTessera = dataScadenzaTessera;
-    }
-
-    public List<Abbonamento> getAbbonamenti() {
-        return abbonamenti;
-    }
-
-    public void setAbbonamenti(List<Abbonamento> abbonamenti) {
-        this.abbonamenti = abbonamenti;
-    }
 
     @Override
     public String toString() {
@@ -88,9 +68,6 @@ public class Utente {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
-                ", numeroTessera='" + numeroTessera + '\'' +
-                ", dataScadenzaTessera=" + dataScadenzaTessera +
-                ", abbonamenti=" + abbonamenti +
                 '}';
     }
 }
