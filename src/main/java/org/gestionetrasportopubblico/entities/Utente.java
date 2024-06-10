@@ -1,16 +1,20 @@
 package org.gestionetrasportopubblico.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Utente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
     private String nome;
     private String cognome;
     private String numeroTessera;
@@ -34,7 +38,7 @@ public class Utente {
         this.abbonamenti = abbonamenti;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

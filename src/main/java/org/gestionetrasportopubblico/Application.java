@@ -17,10 +17,10 @@ public class Application {
 
         //crea utente
         Utente utente = new Utente();
-        utente.setNome("nikita");
-        utente.setCognome("Ivanov");
-        utente.setNumeroTessera("12345678912");
-        utente.setDataScadenzaTessera(LocalDate.now().plusYears(1));
+        utente.setNome("emanuele");
+        utente.setCognome("Ivfdvdfvdfv");
+        utente.setNumeroTessera("46461651");
+        utente.setDataScadenzaTessera(LocalDate.now().plusYears(5));
         utenteDAO.create(utente);
 
 

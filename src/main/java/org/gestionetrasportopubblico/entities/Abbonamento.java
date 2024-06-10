@@ -8,8 +8,7 @@ import java.time.LocalDate;
 public class Abbonamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String codiceUnivoco;
+    private Long codiceUnivoco;
     @Enumerated(EnumType.STRING)
     private TipoAbbonamento tipo;
     private LocalDate dataInizio;
@@ -24,25 +23,18 @@ public class Abbonamento {
     public Abbonamento() {
     }
 
-    public Abbonamento(String codiceUnivoco, TipoAbbonamento tipo, LocalDate dataInizio, LocalDate dataFine, Utente utente) {
-        this.codiceUnivoco = codiceUnivoco;
+    public Abbonamento(TipoAbbonamento tipo, LocalDate dataInizio, LocalDate dataFine, Utente utente) {
         this.tipo = tipo;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.utente = utente;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public String getCodiceUnivoco() {
+    public Long getCodiceUnivoco() {
         return codiceUnivoco;
     }
 
-    public void setCodiceUnivoco(String codiceUnivoco) {
-        this.codiceUnivoco = codiceUnivoco;
-    }
 
     public TipoAbbonamento getTipo() {
         return tipo;
@@ -79,8 +71,7 @@ public class Abbonamento {
     @Override
     public String toString() {
         return "Abbonamento{" +
-                "id=" + id +
-                ", codiceUnivoco='" + codiceUnivoco + '\'' +
+                "codiceUnivoco=" + codiceUnivoco +
                 ", tipo=" + tipo +
                 ", dataInizio=" + dataInizio +
                 ", dataFine=" + dataFine +

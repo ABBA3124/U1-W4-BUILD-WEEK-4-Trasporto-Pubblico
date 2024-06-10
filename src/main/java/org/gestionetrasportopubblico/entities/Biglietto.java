@@ -9,8 +9,7 @@ import java.time.LocalDate;
 public class Biglietto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String codiceUnivoco;
+    private Long codiceUnivoco;
     private LocalDate dataEmissione;
 
 
@@ -25,24 +24,17 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(String codiceUnivoco, LocalDate dataEmissione, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico) {
-        this.codiceUnivoco = codiceUnivoco;
+    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico) {
         this.dataEmissione = dataEmissione;
         this.puntoVendita = puntoVendita;
         this.distributoreAutomatico = distributoreAutomatico;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public String getCodiceUnivoco() {
+    public Long getCodiceUnivoco() {
         return codiceUnivoco;
     }
 
-    public void setCodiceUnivoco(String codiceUnivoco) {
-        this.codiceUnivoco = codiceUnivoco;
-    }
 
     public LocalDate getDataEmissione() {
         return dataEmissione;
@@ -71,8 +63,7 @@ public class Biglietto {
     @Override
     public String toString() {
         return "Biglietto{" +
-                "id=" + id +
-                ", codiceUnivoco='" + codiceUnivoco + '\'' +
+                "codiceUnivoco=" + codiceUnivoco +
                 ", dataEmissione=" + dataEmissione +
                 ", puntoVendita=" + puntoVendita +
                 ", distributoreAutomatico=" + distributoreAutomatico +
