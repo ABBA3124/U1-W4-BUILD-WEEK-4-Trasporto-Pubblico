@@ -5,6 +5,7 @@ import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.UtenteDAO;
 import org.gestionetrasportopubblico.entities.Utente;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Application {
@@ -15,19 +16,29 @@ public class Application {
 
         UtenteDAO utenteDAO = new UtenteDAO();
 
-        //crea utente
+//---------------------------------------------------------------------------------CREO UTENTI---------------------------------------------------------------------------------
 //        Utente utente = new Utente();
-//        utente.setNome("emanuele");
-//        utente.setCognome("Ivfdvdfvdfv");
-//        utente.setNumeroTessera("46461651");
+//        utente.setNome("cdfsvfdv");
+//        utente.setCognome("Ivfdvddfvdvfdfvdfv");
+//        utente.setNumeroTessera("4646116514646651");
 //        utente.setDataScadenzaTessera(LocalDate.now().plusYears(5));
 //        utenteDAO.create(utente);
 
-
 //        System.out.println(utente);
 
+//---------------------------------------------------------------------------------CERCO UTENTI CON UUID---------------------------------------------------------------------------------
         Utente daTrovare = utenteDAO.findById(UUID.fromString("828028ab-16c2-4657-9e50-1f5ec8c55c5b"));
         System.out.println("Utente trovato: " + daTrovare.getNome() + " " + daTrovare.getCognome());
+
+
+//---------------------------------------------------------------------------------CERCO TUTTI GLI UTENTI---------------------------------------------------------------------------------
+        List<Utente> utenti = utenteDAO.findAll();
+        System.out.println("lista trovata");
+        for (Utente u : utenti) {
+            System.out.println(u.getNome() + " " + u.getCognome());
+        }
+        
+//---------------------------------------------------------------------------------CERCO TUTTI GLI UTENTI---------------------------------------------------------------------------------
 
 
     }

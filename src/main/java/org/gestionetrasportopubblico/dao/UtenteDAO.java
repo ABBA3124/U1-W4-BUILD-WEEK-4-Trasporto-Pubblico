@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.entities.Utente;
 
+import java.util.List;
 import java.util.UUID;
 
 public class UtenteDAO {
@@ -24,5 +25,12 @@ public class UtenteDAO {
         Utente utente = em.find(Utente.class, id);
         em.close();
         return utente;
+    }
+
+    public List<Utente> findAll() {
+        EntityManager em = emf.createEntityManager();
+        List<Utente> utenti = em.createQuery("FROM Utente", Utente.class).getResultList();
+        em.close();
+        return utenti;
     }
 }
