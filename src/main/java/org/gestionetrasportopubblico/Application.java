@@ -4,9 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.*;
-import org.gestionetrasportopubblico.entities.Tessera;
-import org.gestionetrasportopubblico.entities.Utente;
+import org.gestionetrasportopubblico.entities.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class Application {
@@ -24,18 +24,18 @@ public class Application {
         BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
 
         //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
-//        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
-//        tesseraDAO.create(tessera);
-//        System.out.println(tessera);
+        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
+        tesseraDAO.create(tessera);
+        System.out.println(tessera);
 
-        Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("c446a62f-784d-46f6-9cbc-29f77b8a486e"));
+        //Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("c446a62f-784d-46f6-9cbc-29f77b8a486e"));
 
 //---------------------------------------------------------------------------------CREO UTENTI---------------------------------------------------------------------------------
 //        Utente utente = new Utente("Nikita", "Test", tessera);
 //        utenteDAO.create(utente);
 
 //        System.out.println(utente);
-        Utente utenteDB = utenteDAO.findById(UUID.fromString("cb8eab38-db78-43e1-8cce-38e29143fb59"));
+        Utente utenteDB = utenteDAO.findById(UUID.fromString("b44d01a3-db10-4231-8e2b-31fb50ef91af"));
 
 //---------------------------------------------------------------------------------CERCO UTENTI CON UUID---------------------------------------------------------------------------------
 //        Utente daTrovare = utenteDAO.findById(UUID.fromString("828028ab-16c2-4657-9e50-1f5ec8c55c5b"));
@@ -72,7 +72,7 @@ public class Application {
 //        distributoreautomaticoDAO.create(distributoreautomatico);
 
 //---------------------------------------------------------------------------------Crea Biglietto------------------------------------------------------------------------------------------
-//        Biglietto biglietto = new Biglietto(LocalDate.now(), null, distributoreautomatico, utenteDB);
+//        Biglietto biglietto = new Biglietto(LocalDate.now().plusDays(7), null, distributoreautomatico, utenteDB);
 //        bigliettoDAO.create(biglietto);
 
 //---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------
@@ -82,5 +82,14 @@ public class Application {
 //---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
 //        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.SETTIMANALE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), tesseraDB, utenteDB, puntovendita, null);
 //        abbonamentoDAO.create(abbonamento);
+
+        MezzoDAO md = new MezzoDAO(em);
+        TrattaDAO td = new TrattaDAO(em);
+        Tratta tratta1 = new Tratta("Messina", "Udine", 10);
+        td.createTratta(tratta1);
+        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25);
+        md.createMezzo(autobus1);
+
+
     }
 }

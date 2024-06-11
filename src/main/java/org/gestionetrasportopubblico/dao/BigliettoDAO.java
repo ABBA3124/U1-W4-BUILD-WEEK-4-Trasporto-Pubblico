@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Biglietto;
 
+import java.util.List;
 import java.util.UUID;
 
 public class BigliettoDAO {
@@ -29,5 +30,10 @@ public class BigliettoDAO {
     public Biglietto findById(UUID id) {
         Biglietto biglietto = em.find(Biglietto.class, id);
         return biglietto;
+    }
+
+    public List<Biglietto> findAll() {
+        List<Biglietto> listaBiglietti = em.createQuery("SELECT b FROM Biglietto b", Biglietto.class).getResultList();
+        return listaBiglietti;
     }
 }

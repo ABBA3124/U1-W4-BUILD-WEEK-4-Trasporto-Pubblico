@@ -25,6 +25,11 @@ public class Biglietto {
     @JoinColumn(name = "utente_id")
     private Utente utente;
 
+
+    @ManyToOne
+    @JoinColumn(name = "mezzo_id")
+    private Mezzo mezzo;
+
     public Biglietto() {
     }
 
@@ -77,8 +82,6 @@ public class Biglietto {
         return "Biglietto{" +
                 "codiceUnivoco=" + codiceUnivoco +
                 ", dataEmissione=" + dataEmissione +
-                ", puntoVendita=" + puntoVendita +
-                ", distributoreAutomatico=" + distributoreAutomatico +
                 ", utente=" + utente +
                 '}';
     }
