@@ -4,10 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.*;
-import org.gestionetrasportopubblico.entities.*;
-
-import java.time.LocalDate;
-import java.util.UUID;
+import org.gestionetrasportopubblico.entities.Autobus;
+import org.gestionetrasportopubblico.entities.Mezzo;
+import org.gestionetrasportopubblico.entities.Tratta;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U1-W4-BUILD-WEEK-4-Trasporto-Pubblico");
@@ -24,9 +23,9 @@ public class Application {
         BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
 
         //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
-        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
-        tesseraDAO.create(tessera);
-        System.out.println(tessera);
+//        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
+//        tesseraDAO.create(tessera);
+//        System.out.println(tessera);
 
         //Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("c446a62f-784d-46f6-9cbc-29f77b8a486e"));
 
@@ -35,7 +34,7 @@ public class Application {
 //        utenteDAO.create(utente);
 
 //        System.out.println(utente);
-        Utente utenteDB = utenteDAO.findById(UUID.fromString("b44d01a3-db10-4231-8e2b-31fb50ef91af"));
+        // Utente utenteDB = utenteDAO.findById(UUID.fromString("b44d01a3-db10-4231-8e2b-31fb50ef91af"));
 
 //---------------------------------------------------------------------------------CERCO UTENTI CON UUID---------------------------------------------------------------------------------
 //        Utente daTrovare = utenteDAO.findById(UUID.fromString("828028ab-16c2-4657-9e50-1f5ec8c55c5b"));
@@ -72,7 +71,7 @@ public class Application {
 //        distributoreautomaticoDAO.create(distributoreautomatico);
 
 //---------------------------------------------------------------------------------Crea Biglietto------------------------------------------------------------------------------------------
-//        Biglietto biglietto = new Biglietto(LocalDate.now().plusDays(7), null, distributoreautomatico, utenteDB);
+//        Biglietto biglietto = new Biglietto(LocalDate.now().plusDays(7), null, distributoreautomatico, utente);
 //        bigliettoDAO.create(biglietto);
 
 //---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------

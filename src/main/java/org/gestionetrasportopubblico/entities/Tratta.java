@@ -17,6 +17,8 @@ public class Tratta {
     private String partenza;
     private String capolinea;
     private double tempo_medio;
+    private double tempo_effettivo;
+    private int numero_percorrenze;
 
 
     @ManyToMany(mappedBy = "lista_tratte")
@@ -26,10 +28,10 @@ public class Tratta {
     public Tratta() {
     }
 
-    public Tratta(String partenza, String capolinea, double tempo_medio) {
+    public Tratta(String partenza, String capolinea, double tempo_effettivo) {
         this.partenza = partenza;
         this.capolinea = capolinea;
-        this.tempo_medio = tempo_medio;
+        this.tempo_medio = tempo_effettivo;
     }
     //Metodi
 
@@ -71,6 +73,21 @@ public class Tratta {
         this.listaMezzi = listaMezzi;
     }
 
+    public double getTempo_effettivo() {
+        return tempo_effettivo;
+    }
+
+    public void setTempo_effettivo(double tempo_effettivo) {
+        this.tempo_effettivo = tempo_effettivo;
+    }
+
+    public int getNumero_percorrenze() {
+        return numero_percorrenze;
+    }
+
+    public void setNumero_percorrenze(int numero_percorrenze) {
+        this.numero_percorrenze = numero_percorrenze;
+    }
 
     @Override
     public String toString() {
