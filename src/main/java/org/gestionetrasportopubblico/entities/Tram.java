@@ -15,8 +15,8 @@ public class Tram extends Mezzo {
     public Tram() {
     }
 
-    public Tram(boolean in_servizio, boolean in_manutenzione, List<Biglietto> lista_biglietti, int capienza) {
-        super(in_servizio, in_manutenzione, lista_biglietti);
+    public Tram(boolean in_servizio, boolean in_manutenzione, List<Biglietto> lista_biglietti, int capienza, Percorrenza percorrenza) {
+        super(in_servizio, in_manutenzione, lista_biglietti, percorrenza);
         this.capienza = capienza;
     }
 

@@ -17,35 +17,30 @@ public abstract class Mezzo {
     private boolean in_servizio;
     private boolean in_manutenzione;
 
+    @ManyToOne
+    @JoinColumn(name = "percorrenza_id")
+    private Percorrenza percorrenza;
+
 
     @OneToMany(mappedBy = "mezzo")
     private List<Biglietto> lista_biglietti;
-
-    @ManyToMany
-    @JoinTable(name = "percorrenza", joinColumns = @JoinColumn(name = "mezzo_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "tratta_id", nullable = false))
-    private List<Tratta> lista_tratte;
 
 
     //costruttori
     public Mezzo() {
     }
 
-    public Mezzo(boolean in_servizio, boolean in_manutenzione, List<Biglietto> lista_biglietti) {
+    public Mezzo(boolean in_servizio, boolean in_manutenzione, List<Biglietto> lista_biglietti, Percorrenza percorrenza) {
         this.in_servizio = in_servizio;
         this.in_manutenzione = in_manutenzione;
         this.lista_biglietti = lista_biglietti;
+        this.percorrenza = percorrenza;
     }
-
-    //Metodi
-
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public boolean isIn_servizio() {
         return in_servizio;
@@ -63,20 +58,13 @@ public abstract class Mezzo {
         this.in_manutenzione = in_manutenzione;
     }
 
+    public Percorrenza getPercorrenza() {
+        return percorrenza;
+    }
+
+
     public List<Biglietto> getLista_biglietti() {
         return lista_biglietti;
-    }
-
-    public void setLista_biglietti(List<Biglietto> lista_biglietti) {
-        this.lista_biglietti = lista_biglietti;
-    }
-
-    public List<Tratta> getLista_tratte() {
-        return lista_tratte;
-    }
-
-    public void setLista_tratte(List<Tratta> lista_tratte) {
-        this.lista_tratte = lista_tratte;
     }
 
     @Override
@@ -85,8 +73,8 @@ public abstract class Mezzo {
                 "id=" + id +
                 ", in_servizio=" + in_servizio +
                 ", in_manutenzione=" + in_manutenzione +
+                ", percorrenza=" + percorrenza +
                 ", lista_biglietti=" + lista_biglietti +
                 '}';
     }
-
 }

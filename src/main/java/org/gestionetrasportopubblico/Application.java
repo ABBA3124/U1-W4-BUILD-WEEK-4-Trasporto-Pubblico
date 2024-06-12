@@ -4,9 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.*;
-import org.gestionetrasportopubblico.entities.Autobus;
-import org.gestionetrasportopubblico.entities.Mezzo;
-import org.gestionetrasportopubblico.entities.Tratta;
+import org.gestionetrasportopubblico.entities.*;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U1-W4-BUILD-WEEK-4-Trasporto-Pubblico");
@@ -82,12 +80,28 @@ public class Application {
 //        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.SETTIMANALE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), tesseraDB, utenteDB, puntovendita, null);
 //        abbonamentoDAO.create(abbonamento);
 
+//---------------------------------------------------------------------------------Creo Percorrenza------------------------------------------------------------------------------------------
+
+        PercorrenzaDAO per = new PercorrenzaDAO(em);
+        Percorrenza a1 = new Percorrenza(12.13);
+        per.creaPercorrenza(a1);
+        System.out.println(a1);
+
+        Percorrenza a2 = new Percorrenza(25.17);
+        per.creaPercorrenza(a2);
+        System.out.println(a2);
+
+
+//---------------------------------------------------------------------------------Creo mezzi------------------------------------------------------------------------------------------
         MezzoDAO md = new MezzoDAO(em);
         TrattaDAO td = new TrattaDAO(em);
         Tratta tratta1 = new Tratta("Messina", "Udine", 10);
         td.createTratta(tratta1);
-        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25);
+        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, a1);
         md.createMezzo(autobus1);
+
+        Mezzo tram1 = new Tram(true, false, bigliettoDAO.findAll(), 180, a2);
+        md.createMezzo(tram1);
 
 
     }

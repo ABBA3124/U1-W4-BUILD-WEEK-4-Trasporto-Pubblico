@@ -2,7 +2,6 @@ package org.gestionetrasportopubblico.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,39 +13,37 @@ public class Tratta {
     @GeneratedValue
     private UUID id;
 
-    private String partenza;
+    private String zone_di_partenza;
     private String capolinea;
     private double tempo_medio;
-    private double tempo_effettivo;
-    private int numero_percorrenze;
 
 
-    @ManyToMany(mappedBy = "lista_tratte")
-    private List<Mezzo> listaMezzi;
+    @ManyToOne
+    @JoinColumn(name = "tratta_id")
+    private Percorrenza percorrenza;
+
 
     //Costruttori
     public Tratta() {
     }
 
-    public Tratta(String partenza, String capolinea, double tempo_effettivo) {
-        this.partenza = partenza;
+    public Tratta(String zone_di_partenza, String capolinea, double tempo_medio) {
+        this.zone_di_partenza = zone_di_partenza;
         this.capolinea = capolinea;
-        this.tempo_medio = tempo_effettivo;
+        this.tempo_medio = tempo_medio;
     }
-    //Metodi
-
 
     public UUID getId() {
         return id;
     }
 
 
-    public String getPartenza() {
-        return partenza;
+    public String getZone_di_partenza() {
+        return zone_di_partenza;
     }
 
-    public void setPartenza(String partenza) {
-        this.partenza = partenza;
+    public void setZone_di_partenza(String zone_di_partenza) {
+        this.zone_di_partenza = zone_di_partenza;
     }
 
     public String getCapolinea() {
@@ -65,38 +62,18 @@ public class Tratta {
         this.tempo_medio = tempo_medio;
     }
 
-    public List<Mezzo> getListaMezzi() {
-        return listaMezzi;
-    }
-
-    public void setListaMezzi(List<Mezzo> listaMezzi) {
-        this.listaMezzi = listaMezzi;
-    }
-
-    public double getTempo_effettivo() {
-        return tempo_effettivo;
-    }
-
-    public void setTempo_effettivo(double tempo_effettivo) {
-        this.tempo_effettivo = tempo_effettivo;
-    }
-
-    public int getNumero_percorrenze() {
-        return numero_percorrenze;
-    }
-
-    public void setNumero_percorrenze(int numero_percorrenze) {
-        this.numero_percorrenze = numero_percorrenze;
+    public Percorrenza getPercorrenza() {
+        return percorrenza;
     }
 
     @Override
     public String toString() {
         return "Tratta{" +
                 "id=" + id +
-                ", partenza='" + partenza + '\'' +
+                ", zone_di_partenza='" + zone_di_partenza + '\'' +
                 ", capolinea='" + capolinea + '\'' +
                 ", tempo_medio=" + tempo_medio +
-                ", listaMezzi=" + listaMezzi +
+                ", percorrenza=" + percorrenza +
                 '}';
     }
 }
