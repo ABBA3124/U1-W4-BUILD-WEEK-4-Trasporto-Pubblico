@@ -25,7 +25,7 @@ public class Tessera {
     }
 
     public Tessera(LocalDate validita) {
-        this.validita = validita;
+        this.validita = LocalDate.now().plusYears(1);
     }
 
     public UUID getNumero_tessera() {
