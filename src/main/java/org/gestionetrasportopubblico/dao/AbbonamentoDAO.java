@@ -3,9 +3,9 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Abbonamento;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public class AbbonamentoDAO {
 
@@ -27,9 +27,11 @@ public class AbbonamentoDAO {
         }
     }
 
-    public Abbonamento findById(UUID id) {
+    public Abbonamento findById(long id) {
         Abbonamento abbonamento = em.find(Abbonamento.class, id);
-        em.close();
+        if (abbonamento == null) {
+            throw new NotFoundException(id);
+        }
         return abbonamento;
     }
 

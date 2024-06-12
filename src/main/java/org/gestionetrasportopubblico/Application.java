@@ -87,6 +87,7 @@ public class Application {
 //        abbonamentoDAO.create(abbonamento);
 //        System.out.println(abbonamentoDAO.findAll());
 //        abbonamentoDAO.deleteFromId(2);
+//        System.out.println(abbonamentoDAO.findById(1));
 
 //---------------------------------------------------------------------------------Creo Percorrenza------------------------------------------------------------------------------------------
 

@@ -3,6 +3,7 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Tessera;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +30,9 @@ public class TesseraDAO {
 
     public Tessera findById(UUID id) {
         Tessera tessera = em.find(Tessera.class, id);
+        if (tessera == null) {
+            throw new NotFoundException(id);
+        }
         return tessera;
     }
 

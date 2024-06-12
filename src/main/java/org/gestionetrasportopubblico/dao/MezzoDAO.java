@@ -3,6 +3,7 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Mezzo;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,6 +29,9 @@ public class MezzoDAO {
 
     public Mezzo findById(UUID id) {
         Mezzo mezzo = em.find(Mezzo.class, id);
+        if (mezzo == null) {
+            throw new NotFoundException(id);
+        }
         return mezzo;
     }
 

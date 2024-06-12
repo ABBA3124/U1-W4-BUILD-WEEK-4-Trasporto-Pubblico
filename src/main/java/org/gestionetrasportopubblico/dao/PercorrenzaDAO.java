@@ -3,9 +3,9 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Percorrenza;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public class PercorrenzaDAO {
 
@@ -28,8 +28,11 @@ public class PercorrenzaDAO {
         }
     }
 
-    public Percorrenza findById(UUID id) {
+    public Percorrenza findById(long id) {
         Percorrenza percorrenza = em.find(Percorrenza.class, id);
+        if (percorrenza == null) {
+            throw new NotFoundException(id);
+        }
         return percorrenza;
     }
 

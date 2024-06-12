@@ -3,9 +3,9 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.DistributoreAutomatico;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public class DistributoreAutomaticoDAO {
 
@@ -27,9 +27,12 @@ public class DistributoreAutomaticoDAO {
         }
     }
 
-    public DistributoreAutomatico findById(UUID id) {
-        DistributoreAutomatico distributoreautomatico = em.find(DistributoreAutomatico.class, id);
-        return distributoreautomatico;
+    public DistributoreAutomatico findById(long id) {
+        DistributoreAutomatico distributoreAutomatico = em.find(DistributoreAutomatico.class, id);
+        if (distributoreAutomatico == null) {
+            throw new NotFoundException(id);
+        }
+        return distributoreAutomatico;
     }
 
     public void update(DistributoreAutomatico distributoreAutomatico) {

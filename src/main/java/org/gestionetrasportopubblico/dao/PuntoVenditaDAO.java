@@ -3,9 +3,9 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.PuntoVendita;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public class PuntoVenditaDAO {
 
@@ -27,9 +27,12 @@ public class PuntoVenditaDAO {
         }
     }
 
-    public PuntoVendita findById(UUID id) {
-        PuntoVendita puntovendita = em.find(PuntoVendita.class, id);
-        return puntovendita;
+    public PuntoVendita findById(long id) {
+        PuntoVendita puntoVendita = em.find(PuntoVendita.class, id);
+        if (puntoVendita == null) {
+            throw new NotFoundException(id);
+        }
+        return puntoVendita;
     }
 
     public void update(PuntoVendita puntoVendita) {

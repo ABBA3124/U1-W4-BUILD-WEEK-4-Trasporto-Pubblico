@@ -3,6 +3,7 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Tratta;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,6 +29,9 @@ public class TrattaDAO {
 
     public Tratta findById(UUID id) {
         Tratta tratta = em.find(Tratta.class, id);
+        if (tratta == null) {
+            throw new NotFoundException(id);
+        }
         return tratta;
     }
 

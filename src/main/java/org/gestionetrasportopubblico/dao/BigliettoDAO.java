@@ -3,9 +3,9 @@ package org.gestionetrasportopubblico.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Biglietto;
+import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public class BigliettoDAO {
 
@@ -27,8 +27,11 @@ public class BigliettoDAO {
         }
     }
 
-    public Biglietto findById(UUID id) {
+    public Biglietto findById(long id) {
         Biglietto biglietto = em.find(Biglietto.class, id);
+        if (biglietto == null) {
+            throw new NotFoundException(id);
+        }
         return biglietto;
     }
 
