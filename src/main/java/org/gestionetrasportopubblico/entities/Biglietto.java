@@ -11,6 +11,7 @@ public class Biglietto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codiceUnivoco;
     private LocalDate dataEmissione;
+    private boolean convalidato;
 
 
     @ManyToOne
@@ -33,11 +34,13 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico, Utente utente) {
+    public Biglietto(LocalDate dataEmissione, boolean convalidato, PuntoVendita puntoVendita, DistributoreAutomatico distributoreAutomatico, Utente utente, Mezzo mezzo) {
         this.dataEmissione = dataEmissione;
+        this.convalidato = convalidato;
         this.puntoVendita = puntoVendita;
         this.distributoreAutomatico = distributoreAutomatico;
         this.utente = utente;
+        this.mezzo = mezzo;
     }
 
     public Long getCodiceUnivoco() {
@@ -77,12 +80,30 @@ public class Biglietto {
         this.utente = utente;
     }
 
+    public boolean isConvalidato() {
+        return convalidato;
+    }
+
+    public void setConvalidato(boolean convalidato) {
+        this.convalidato = convalidato;
+    }
+
+    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }
+
     @Override
     public String toString() {
         return "Biglietto{" +
                 "codiceUnivoco=" + codiceUnivoco +
                 ", dataEmissione=" + dataEmissione +
+                ", convalidato=" + convalidato +
                 ", utente=" + utente +
+                ", mezzo=" + mezzo +
                 '}';
     }
 }

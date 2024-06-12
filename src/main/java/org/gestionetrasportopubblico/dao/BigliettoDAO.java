@@ -2,10 +2,12 @@ package org.gestionetrasportopubblico.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import org.gestionetrasportopubblico.entities.Biglietto;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.UUID;
 
 public class BigliettoDAO {
 
@@ -60,5 +62,16 @@ public class BigliettoDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<Biglietto> validitaBiglietto() {
+        TypedQuery<Biglietto> query = em.createQuery("SELECT t FROM Biglietto t WHERE t.convalidato = true", Biglietto.class);
+        return query.getResultList();
+    }
+
+    public TypedQuery<Long> bigliettiConvalidati(UUID Id) {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(vt) FROM Biglietto vt WHERE vt.convalidato = true AND vt.mezzo_id = :Id", Long.class);
+        query.setParameter("Id", Id);
+        return query;
     }
 }

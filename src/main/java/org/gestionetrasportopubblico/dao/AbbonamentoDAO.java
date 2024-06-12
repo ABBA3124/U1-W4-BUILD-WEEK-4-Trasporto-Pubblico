@@ -2,10 +2,13 @@ package org.gestionetrasportopubblico.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import org.gestionetrasportopubblico.entities.Abbonamento;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public class AbbonamentoDAO {
 
@@ -61,5 +64,13 @@ public class AbbonamentoDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    public List<Abbonamento> abbValidiTessera(UUID Id) {
+        TypedQuery<Abbonamento> query = em.createQuery("SELECT s FROM Abbonamento s WHERE s.tessera.numero_tessera = :numero_tessera AND s.tessera.validita > currentDate", Abbonamento.class);
+        query.setParameter("numero_tessera", Id);
+        query.setParameter("currentDate", LocalDate.now());
+        return query.getResultList();
+    }
+
 
 }

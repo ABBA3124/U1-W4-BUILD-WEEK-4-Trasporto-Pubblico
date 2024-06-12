@@ -2,6 +2,7 @@ package org.gestionetrasportopubblico.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import org.gestionetrasportopubblico.entities.Mezzo;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
@@ -61,4 +62,10 @@ public class MezzoDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    public List<Mezzo> mezziManutenzione() {
+        TypedQuery<Mezzo> query = em.createQuery("SELECT v FROM Mezzo v WHERE v.in_manutenzione = true", Mezzo.class);
+        return query.getResultList();
+    }
+
 }
