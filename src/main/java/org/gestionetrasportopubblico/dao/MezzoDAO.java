@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Mezzo;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MezzoDAO {
@@ -14,10 +15,15 @@ public class MezzoDAO {
     }
 
     public void createMezzo(Mezzo mezzo) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(mezzo);
-        transaction.commit();
+        try {
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(mezzo);
+            transaction.commit();
+            System.out.println("---Il mezzo con id " + mezzo.getId() + " è stato salvato");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Mezzo findById(UUID id) {
@@ -29,5 +35,26 @@ public class MezzoDAO {
         em.getTransaction().begin();
         em.merge(mezzo);
         em.getTransaction().commit();
+        System.out.println("---Il mezzo " + mezzo.getId() + " è stato aggiornato");
+    }
+
+    public List<Mezzo> findAll() {
+        List<Mezzo> listaMezzi = em.createQuery("SELECT m FROM Mezzo m", Mezzo.class).getResultList();
+        return listaMezzi;
+    }
+
+    public void deleteFromId(UUID id) {
+        try {
+            EntityTransaction t = em.getTransaction();
+            Mezzo found = em.find(Mezzo.class, id);
+            if (found != null) {
+                t.begin();
+                em.remove(found);
+                t.commit();
+                System.out.println("---Il mezzo è stato eliminato");
+            } else System.out.println("---Il mezzo non è stato trovato");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

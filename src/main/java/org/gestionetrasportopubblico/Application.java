@@ -4,7 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.gestionetrasportopubblico.dao.*;
-import org.gestionetrasportopubblico.entities.*;
+import org.gestionetrasportopubblico.entities.Abbonamento;
+import org.gestionetrasportopubblico.entities.TipoAbbonamento;
+
+import java.time.LocalDate;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U1-W4-BUILD-WEEK-4-Trasporto-Pubblico");
@@ -13,12 +16,15 @@ public class Application {
         System.out.println("Start build week");
 
         EntityManager em = emf.createEntityManager();
-        UtenteDAO utenteDAO = new UtenteDAO(em);
-        TesseraDAO tesseraDAO = new TesseraDAO(em);
         AbbonamentoDAO abbonamentoDAO = new AbbonamentoDAO(em);
-        PuntoVenditaDAO puntovenditaDAO = new PuntoVenditaDAO(em);
-        DistributoreAutomaticoDAO distributoreautomaticoDAO = new DistributoreAutomaticoDAO(em);
         BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
+        DistributoreAutomaticoDAO distributoreautomaticoDAO = new DistributoreAutomaticoDAO(em);
+        MezzoDAO mezzoDAO = new MezzoDAO(em);
+        PercorrenzaDAO percorrenzaDAO = new PercorrenzaDAO(em);
+        PuntoVenditaDAO puntovenditaDAO = new PuntoVenditaDAO(em);
+        TesseraDAO tesseraDAO = new TesseraDAO(em);
+        TrattaDAO trattaDAO = new TrattaDAO(em);
+        UtenteDAO utenteDAO = new UtenteDAO(em);
 
         //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
 //        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
@@ -77,31 +83,31 @@ public class Application {
 //        puntovenditaDAO.create(puntovendita);
 
 //---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
-//        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.SETTIMANALE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), tesseraDB, utenteDB, puntovendita, null);
+        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), null, null, null, null);
 //        abbonamentoDAO.create(abbonamento);
+//        System.out.println(abbonamentoDAO.findAll());
+//        abbonamentoDAO.deleteFromId(2);
 
 //---------------------------------------------------------------------------------Creo Percorrenza------------------------------------------------------------------------------------------
 
-        PercorrenzaDAO per = new PercorrenzaDAO(em);
-        Percorrenza a1 = new Percorrenza(12.13);
-        per.creaPercorrenza(a1);
-        System.out.println(a1);
-
-        Percorrenza a2 = new Percorrenza(25.17);
-        per.creaPercorrenza(a2);
-        System.out.println(a2);
+//        Percorrenza a1 = new Percorrenza(12.13);
+//        percorrenzaDAO.create(a1);
+//        System.out.println(a1);
+//
+//        Percorrenza a2 = new Percorrenza(25.17);
+//        percorrenzaDAO.create(a2);
+//        System.out.println(a2);
 
 
 //---------------------------------------------------------------------------------Creo mezzi------------------------------------------------------------------------------------------
-        MezzoDAO md = new MezzoDAO(em);
-        TrattaDAO td = new TrattaDAO(em);
-        Tratta tratta1 = new Tratta("Messina", "Udine", 10);
-        td.createTratta(tratta1);
-        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, a1);
-        md.createMezzo(autobus1);
 
-        Mezzo tram1 = new Tram(true, false, bigliettoDAO.findAll(), 180, a2);
-        md.createMezzo(tram1);
+//        Tratta tratta1 = new Tratta("Messina", "Udine", 10);
+//        trattaDAO.create(tratta1);
+//        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, a1);
+//        mezzoDAO.createMezzo(autobus1);
+//
+//        Mezzo tram1 = new Tram(true, false, bigliettoDAO.findAll(), 180, a2);
+//        mezzoDAO.createMezzo(tram1);
 
 
     }

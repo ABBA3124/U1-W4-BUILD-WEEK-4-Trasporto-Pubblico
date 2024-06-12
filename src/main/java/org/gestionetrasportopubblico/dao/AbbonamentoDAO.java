@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.gestionetrasportopubblico.entities.Abbonamento;
 
+import java.util.List;
 import java.util.UUID;
 
 public class AbbonamentoDAO {
@@ -20,7 +21,7 @@ public class AbbonamentoDAO {
             transaction.begin();
             em.persist(abbonamento);
             transaction.commit();
-            System.out.println("---L'abbonamento " + abbonamento.getCodiceUnivoco() + "è stato salvato");
+            System.out.println("---L'abbonamento " + abbonamento.getCodiceUnivoco() + " è stato salvato");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -31,4 +32,32 @@ public class AbbonamentoDAO {
         em.close();
         return abbonamento;
     }
+
+    public void update(Abbonamento abbonamento) {
+        em.getTransaction().begin();
+        em.merge(abbonamento);
+        em.getTransaction().commit();
+        System.out.println("---L'abbonamento " + abbonamento.getCodiceUnivoco() + " è stato aggiornato");
+    }
+
+    public List<Abbonamento> findAll() {
+        List<Abbonamento> listaAbbonamenti = em.createQuery("SELECT a FROM Abbonamento a", Abbonamento.class).getResultList();
+        return listaAbbonamenti;
+    }
+
+    public void deleteFromId(long id) {
+        try {
+            EntityTransaction t = em.getTransaction();
+            Abbonamento found = em.find(Abbonamento.class, id);
+            if (found != null) {
+                t.begin();
+                em.remove(found);
+                t.commit();
+                System.out.println("---L'abbonamento è stato eliminato");
+            } else System.out.println("---L'abbonamento non è stato trovato");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

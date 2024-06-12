@@ -1,20 +1,15 @@
 package org.gestionetrasportopubblico.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @Entity
 public class Percorrenza {
     @Id
-    @GeneratedValue
-    private UUID id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToMany(mappedBy = "percorrenza")
     private List<Mezzo> mezzi;
@@ -37,10 +32,9 @@ public class Percorrenza {
 
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
-
 
     public List<Mezzo> getMezzi() {
         return mezzi;

@@ -21,7 +21,7 @@ public class UtenteDAO {
             transaction.begin();
             em.persist(utente);
             transaction.commit();
-            System.out.println("---L'utente " + utente.getNome() + utente.getCognome() + "è stato salvato");
+            System.out.println("---L'utente " + utente.getNome() + utente.getCognome() + " è stato salvato");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -34,7 +34,6 @@ public class UtenteDAO {
 
     public List<Utente> findAll() {
         List<Utente> utenti = em.createQuery("FROM Utente", Utente.class).getResultList();
-        em.close();
         return utenti;
     }
 
@@ -42,17 +41,21 @@ public class UtenteDAO {
         em.getTransaction().begin();
         em.merge(utente);
         em.getTransaction().commit();
-        em.close();
+        System.out.println("---L'utente " + utente.getNome() + utente.getCognome() + " è stato aggiornato");
     }
 
-    public void delete(UUID id) {
-        em.getTransaction().begin();
-        Utente utente = em.find(Utente.class, id);
-        if (utente != null) {
-            em.remove(utente);
+    public void deleteFromId(UUID id) {
+        try {
+            EntityTransaction t = em.getTransaction();
+            Utente found = em.find(Utente.class, id);
+            if (found != null) {
+                t.begin();
+                em.remove(found);
+                t.commit();
+                System.out.println("---L'utente è stato eliminato");
+            } else System.out.println("---L'utente non è stato trovato");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        em.getTransaction().commit();
-        em.close();
-
     }
 }
