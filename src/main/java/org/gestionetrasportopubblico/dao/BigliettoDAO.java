@@ -24,7 +24,7 @@ public class BigliettoDAO {
             transaction.begin();
             em.persist(biglietto);
             transaction.commit();
-            System.out.println("---Il biglietto " + biglietto.getCodiceUnivoco() + " è stato salvato");
+            System.out.println("---Il biglietto " + biglietto.getUtente() + " è stato salvato");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

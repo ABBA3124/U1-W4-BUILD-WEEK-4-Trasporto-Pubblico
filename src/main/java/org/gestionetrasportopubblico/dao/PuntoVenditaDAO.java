@@ -21,7 +21,7 @@ public class PuntoVenditaDAO {
             transaction.begin();
             em.persist(puntovendita);
             transaction.commit();
-            System.out.println("---Il punto vendita " + puntovendita.getId() + "è stato salvato");
+//            System.out.println("---Il punto vendita " + puntovendita.getNome() + " è stato salvato");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

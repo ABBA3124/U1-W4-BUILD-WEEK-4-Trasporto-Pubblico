@@ -21,7 +21,7 @@ public class DistributoreAutomaticoDAO {
             transaction.begin();
             em.persist(distributoreautomatico);
             transaction.commit();
-            System.out.println("---Il distributore automatico " + distributoreautomatico.getId() + " è stato salvato");
+//            System.out.println("---Il distributore automatico " + distributoreautomatico.getId() + " è stato salvato");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

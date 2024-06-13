@@ -85,7 +85,7 @@ public class Application {
             Utente utente4 = new Utente("luca", "Nardi", tessera4);
             utenteDAO.create(utente4);
 
-            Utente utente5 = new Utente("riccardo", "Gulin", tessera5);
+            Utente utente5 = new Utente("riccardo", "Gulin", null);
             utenteDAO.create(utente5);
 
 
@@ -221,19 +221,19 @@ public class Application {
             //------------------------------------------------------------- BIGLIETTO -------------------------------------------------------------
 
 
-            Biglietto biglietto1 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico1, utente1, autobus1);
+            Biglietto biglietto1 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico1, utente1, autobus1);
             bigliettoDAO.create(biglietto1);
 
-            Biglietto biglietto2 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico2, utente2, autobus2);
+            Biglietto biglietto2 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico2, utente2, autobus2);
             bigliettoDAO.create(biglietto2);
 
-            Biglietto biglietto3 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico3, utente3, autobus3);
+            Biglietto biglietto3 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico3, utente3, autobus3);
             bigliettoDAO.create(biglietto3);
 
-            Biglietto biglietto4 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico4, utente4, tram1);
+            Biglietto biglietto4 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico4, utente4, tram1);
             bigliettoDAO.create(biglietto4);
 
-            Biglietto biglietto5 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico5, utente5, tram2);
+            Biglietto biglietto5 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico5, utente5, tram2);
             bigliettoDAO.create(biglietto5);
 
 
@@ -280,18 +280,12 @@ public class Application {
         //-------------------------------------------------------- Start Scanner --------------------------------------------------------
 
 
-//        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, null);
-//        mezzoDAO.createMezzo(autobus1);
-
-        // Mezzo mezzo = mezzoDAO.findById(UUID.fromString("0a718917-01fc-425d-905e-f58e7a99e098"));
-
-
         System.out.println("\n\t🚌Benvenuto in Trasporti🚃 S.R.L.");
 
         System.out.println("\nSeleziona Modalità: ");
         System.out.println("\n🙋Sei un Cliente? digita --> 1️⃣");
         System.out.println("⚙️Modalità Admin🔧 --> 2️⃣");
-        System.out.println("⬇️");
+        System.out.println("⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️");
         int x = sca.nextInt();
 
         switch (x) {
@@ -306,24 +300,49 @@ public class Application {
                 System.out.println("\n🙋Benvenuto " + nomeUtenteInserito);
 
 
-                System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
-                System.out.println("Tratte --> 4️⃣");
-                System.out.println("Visualizza info Biglietto--> 3");
-                System.out.println("Visualizza Info Abbonamento --> 4");
-                System.out.println("Visualizza Info Utente --> 5");
+                System.out.println("Comprare Biglietto --> 1️⃣");
+                System.out.println("Comprare Abbonamento --> 2️⃣");
+                System.out.println("Tratte --> 3️⃣");
+                System.out.println("Visualizza info Biglietto--> 4️⃣");
+                System.out.println("Visualizza Info Abbonamento --> 5️⃣");
+                System.out.println("Visualizza Info Utente --> 6️⃣");
 
                 int sceltaUtente = sca.nextInt();
                 switch (sceltaUtente) {
                     case 1:
+                        //compra biglietto
 
-                        //compra abbonamento o biglietto
+                        PuntoVendita puntovendita1000 = new PuntoVendita("Ticket di giacomo", "milano");
+                        puntovenditaDAO.create(puntovendita1000);
+
+                        Biglietto vfdvf = new Biglietto(LocalDate.now(), true, puntovendita1000, null, utenteDAO.findByName(nomeUtenteInserito), null);
+                        bigliettoDAO.create(vfdvf);
+
+                        System.out.println("Biglietto acquistato !");
+
+                        break;
+                    case 2:
+                        //compra abbonamento
+
+                        DistributoreAutomatico distributoreAutomatico1000 = new DistributoreAutomatico("Stazione roma termini (london)", true);
+                        distributoreautomaticoDAO.create(distributoreAutomatico1000);
+
+
+                        Tessera tessera10 = new Tessera(LocalDate.now().plusYears(1));
+                        tesseraDAO.create(tessera10);
+
+                        Abbonamento kdbhgscvjhkfbdejh = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now(), LocalDate.now().plusDays(30), tessera10, utenteDAO.findByName(nomeUtenteInserito), null, distributoreAutomatico1000);
+                        abbonamentoDAO.create(kdbhgscvjhkfbdejh);
+
+                        System.out.println("Abbonamento acquistato !");
+
                         break;
 
-                    case 2:
+                    case 3:
                         System.out.println("<-- Tratte -->");
                         System.out.println("Visualizza Tratte --> 1️⃣");
-                        System.out.println("Cerca Tratta per Capolinea --> 2");
-                        System.out.println("Cerca Tratta per Partenza --> 3");
+                        System.out.println("Cerca Tratta per Capolinea --> 2️⃣");
+                        System.out.println("Cerca Tratta per Partenza --> 3️⃣");
                         int tratteScelte = sca.nextInt();
                         sca.nextLine();
                         switch (tratteScelte) {
@@ -349,42 +368,54 @@ public class Application {
                                 List<Tratta> tratte2 = trattaDAO.findByZoneDiPartenza(cercaPerZoneDiPartenza2);
                                 tratte2.forEach(System.out::println);
                                 break;
+                            default:
+                                System.out.println(tratteScelte + " ❌ " + " Inserisci un numero valido.");
+
                         }
                         break;
 
-                    case 3:
+                    case 4:
                         bigliettoDAO.bigliettiPerUtente(nomeUtenteInserito).stream().forEach(System.out::println);
                         break;
 
-                    case 4:
+                    case 5:
                         System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtenteInserito));
                         break;
 
-                    case 5:
+                    case 6:
                         System.out.println(utenteDAO.findByName(nomeUtenteInserito));
                         break;
 
 
                     default:
+                        System.out.println(sceltaUtente + " ❌ " + " Inserisci un numero valido.");
+
                 }
                 break;
+
+            // ENTRIMAO IN ADMIN DIOI CANE
             case 2:
 
                 //qui dentro login per verificare se admin è autorizzato
                 Admin fs0224 = new Admin("Davide", "Abbadessa");
                 System.out.println("🔐Inserisci Codice di sicurezza🔐");
+
+
                 int codice = sca.nextInt();
                 if (codice == fs0224.getCodice()) {
-                    System.out.println("🔓Password Corretta🔓");
-                    //qui dentro tutto quello che può fare un admin
 
-                    //Lista di cose selezionabili
+
+                    System.out.println("🔓Password Corretta🔓");
+
+
+                    //qui dentro tutto quello che può fare un admin
+                    //Lista di cose selezionabili admin
                     System.out.println(fs0224);
                     System.out.println("\n<-- ⚙️Admin Menu🔧 -->");
                     System.out.println("Tratta --> 1️⃣"); //TUTTO OK COMPLETATO✔️
                     System.out.println("Mezzo --> 2️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Distributori --> 3️⃣");
-                    System.out.println("Punti vendita --> 4️⃣");
+                    System.out.println("Distributori --> 3️⃣"); //TUTTO OK COMPLETATO✔️
+                    System.out.println("Punti vendita --> 4️⃣"); //TUTTO OK COMPLETATO✔️
 
                     //sarà la decisione del admin
                     int dentroAdmin = sca.nextInt();
@@ -663,7 +694,7 @@ public class Application {
 
                             break;
                         case 3:
-
+                            // siamo dentro il primo menu admin sezione modale distributori
                             System.out.println("\n<-- Modale Distributori -->");
                             System.out.println("Visualizza Distributore --> 1️⃣");
                             System.out.println("Modificare Distributore --> 2️⃣"); //attivo o fuori servizio
@@ -702,6 +733,7 @@ public class Application {
 
                             break;
                         case 4:
+                            // siamo dentro il primo menu admin sezione modale punti vendita
 
                             System.out.println("\n<-- Modale Punti Vendita -->");
                             System.out.println("Visualizza Punti Vendita --> 1️⃣");
