@@ -35,6 +35,7 @@ public class Autobus extends Mezzo {
     @Override
     public String toString() {
         return "Autobus{" +
+                super.toString() +
                 "capienza=" + capienza +
                 '}';
     }
