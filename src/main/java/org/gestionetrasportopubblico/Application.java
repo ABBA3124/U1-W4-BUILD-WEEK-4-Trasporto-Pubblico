@@ -134,6 +134,8 @@ public class Application {
             case 1:
                 System.out.println("🙋sei dentro cliente🙋");
                 //qui dentro tutto quello che può fare un cliente
+
+
                 break;
             case 2:
                 Admin fs0224 = new Admin("Davide", "Abbadessa");
@@ -149,7 +151,7 @@ public class Application {
 
                     System.out.println("\n<-- ⚙️Admin Menu🔧 -->");
                     System.out.println("Tratta --> 1️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Mezzo --> 2️⃣");
+                    System.out.println("Mezzo --> 2️⃣"); //TUTTO OK COMPLETATO✔️
                     System.out.println("Distributori --> 3️⃣");
                     System.out.println("Punti vendita --> 4️⃣");
 
