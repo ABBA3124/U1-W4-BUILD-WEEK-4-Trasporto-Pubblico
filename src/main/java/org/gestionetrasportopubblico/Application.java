@@ -315,6 +315,8 @@ public class Application {
                 int sceltaUtente = sca.nextInt();
                 switch (sceltaUtente) {
                     case 1:
+
+                        //compra abbonamento o biglietto
                         break;
 
                     case 2:
