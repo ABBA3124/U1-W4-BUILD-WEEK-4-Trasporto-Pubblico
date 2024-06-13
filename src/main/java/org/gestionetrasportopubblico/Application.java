@@ -7,6 +7,7 @@ import org.gestionetrasportopubblico.dao.*;
 import org.gestionetrasportopubblico.entities.*;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -27,100 +28,256 @@ public class Application {
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         TrattaDAO trattaDAO = new TrattaDAO(em);
         UtenteDAO utenteDAO = new UtenteDAO(em);
-//
-//        //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
-//        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
-//        tesseraDAO.create(tessera);
-////        System.out.println(tessera);
-//
-//        //Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("c446a62f-784d-46f6-9cbc-29f77b8a486e"));
-//
-////---------------------------------------------------------------------------------CREO UTENTI---------------------------------------------------------------------------------
-//        Utente utente = new Utente("Giacomo", "Test2", tessera);
-//        utenteDAO.create(utente);
-//
-////        System.out.println(utente);
-//        // Utente utenteDB = utenteDAO.findById(UUID.fromString("b44d01a3-db10-4231-8e2b-31fb50ef91af"));
-//
-////---------------------------------------------------------------------------------CERCO UTENTI CON UUID---------------------------------------------------------------------------------
-////        Utente daTrovare = utenteDAO.findById(UUID.fromString("828028ab-16c2-4657-9e50-1f5ec8c55c5b"));
-////        System.out.println("Utente trovato: " + daTrovare.getNome() + " " + daTrovare.getCognome());
-//
-//
-////---------------------------------------------------------------------------------CERCO TUTTI GLI UTENTI---------------------------------------------------------------------------------
-////        List<Utente> utenti = utenteDAO.findAll();
-////        System.out.println("lista trovata");
-////        for (Utente u : utenti) {
-////            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
-////        }
-//
-////---------------------------------------------------------------------------------AGGIORNO UN UTENTE---------------------------------------------------------------------------------
-////        Utente utenteDaAggiornare = utenteDAO.findById(UUID.fromString("cee86cb1-7644-4fe9-ad91-45bbabc7b12d"));
-////        if (utenteDaAggiornare != null) {
-////            utenteDaAggiornare.setNome("luca");
-////            utenteDaAggiornare.setCognome("nardi");
-////            utenteDAO.update(utenteDaAggiornare);
-////            System.out.println(utenteDaAggiornare.getNome() + " " + utenteDaAggiornare.getCognome());
-////
-////        }
-//
-////---------------------------------------------------------------------------------ELIMINO UN UTENTE CON UUID---------------------------------------------------------------------------------
-////        utenteDAO.delete(UUID.fromString("828028ab-16c2-4657-9e50-1f5ec8c55c5b"));
-////
-////        List<Utente> utenti2 = utenteDAO.findAll();
-////        System.out.println("lista dopo eliminazioen");
-////        for (Utente u : utenti2) {
-////            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
-////        }
-////---------------------------------------------------------------------------------Distributore Automatico---------------------------------------------------------------------------------
-//        DistributoreAutomatico distributoreautomatico = new DistributoreAutomatico("Roma", false);
-//        distributoreautomaticoDAO.create(distributoreautomatico);
-//
-////---------------------------------------------------------------------------------Crea Biglietto------------------------------------------------------------------------------------------
-////        Mezzo mezzo_db = mezzoDAO.findById(UUID.fromString("373f51e4-48e7-4dd7-85a0-93599b6541b7"));
-////        Biglietto biglietto = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico, utente, mezzo_db);
-////        bigliettoDAO.create(biglietto);
-//
-////---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------
-//        PuntoVendita puntovendita = new PuntoVendita("Bar asd", "Roma");
-//        puntovenditaDAO.create(puntovendita);
-//
-////---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
-//        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera, utente, puntovendita, null);
-//        abbonamentoDAO.create(abbonamento);
-////        System.out.println(abbonamentoDAO.findAll());
-////        abbonamentoDAO.deleteFromId(2);
-////        System.out.println(abbonamentoDAO.findById(1));
-//
-////---------------------------------------------------------------------------------Creo Percorrenza------------------------------------------------------------------------------------------
-//
-//        Percorrenza a1 = new Percorrenza(12.13);
-//        percorrenzaDAO.create(a1);
-////        System.out.println(a1);
-////
-//        Percorrenza a2 = new Percorrenza(25.17);
-//        percorrenzaDAO.create(a2);
-////        System.out.println(a2);
-//
-//
-////---------------------------------------------------------------------------------Creo mezzi------------------------------------------------------------------------------------------
-//
-//        Tratta tratta1 = new Tratta("Messina", "Udine", 10);
-//        trattaDAO.create(tratta1);
-//        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, a1);
-//        mezzoDAO.createMezzo(autobus1);
-////
-//        Mezzo tram1 = new Tram(true, false, bigliettoDAO.findAll(), 180, a2);
-//        mezzoDAO.createMezzo(tram1);
-//
-//        System.out.println(bigliettoDAO.validitaBiglietto());
-//        System.out.println(bigliettoDAO.bigliettiConvalidati(UUID.fromString("373f51e4-48e7-4dd7-85a0-93599b6541b7")));
-//
-////        System.out.println(abbonamentoDAO.abbonamentoValiditaTessera(UUID.fromString("795453c1-405c-48b1-851e-4cba0e0abc60")));
+        Scanner sca = new Scanner(System.in);
+
+
+        System.out.println("---- DB PRONTO ----");
+
+        System.out.println("Popolo il db ? (true or false) ");
+
+        //boolean fbdvjkh = sca.nextBoolean();
+        boolean fbdvjkh = false;
+
+        if (fbdvjkh == true) {
+            System.out.println("hai selezionato " + fbdvjkh);
+            //------------------------------------------------------------- TESSERA -------------------------------------------------------------
+            Tessera tessera1 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera1);
+
+            Tessera tessera2 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera2);
+
+            Tessera tessera3 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera3);
+
+            Tessera tessera4 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera4);
+
+            Tessera tessera5 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera5);
+
+            Tessera tessera6 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera6);
+
+            Tessera tessera7 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera7);
+
+            Tessera tessera8 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera8);
+
+            Tessera tessera9 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera9);
+
+            Tessera tessera10 = new Tessera(LocalDate.now().plusYears(1));
+            tesseraDAO.create(tessera10);
+
+
+            //------------------------------------------------------------- UTENTI -------------------------------------------------------------
+            Utente utente1 = new Utente("Davide", "Abbadessa", tessera1);
+            utenteDAO.create(utente1);
+
+            Utente utente2 = new Utente("Nikita", "Ivanov", tessera2);
+            utenteDAO.create(utente2);
+
+            Utente utente3 = new Utente("Emanuele", "Pezzato", tessera3);
+            utenteDAO.create(utente3);
+
+            Utente utente4 = new Utente("Luca", "Nardi", tessera4);
+            utenteDAO.create(utente4);
+
+            Utente utente5 = new Utente("Riccardo", "Gulin", tessera5);
+            utenteDAO.create(utente5);
+
+
+            //------------------------------------------------------------- DISTRIBUTORE AUTOMATICO -------------------------------------------------------------
+            DistributoreAutomatico distributoreautomatico1 = new DistributoreAutomatico("Torino", true);
+            distributoreautomaticoDAO.create(distributoreautomatico1);
+
+            DistributoreAutomatico distributoreautomatico2 = new DistributoreAutomatico("Milano", true);
+            distributoreautomaticoDAO.create(distributoreautomatico2);
+
+            DistributoreAutomatico distributoreautomatico3 = new DistributoreAutomatico("Roma", true);
+            distributoreautomaticoDAO.create(distributoreautomatico3);
+
+            DistributoreAutomatico distributoreautomatico4 = new DistributoreAutomatico("Messina", true);
+            distributoreautomaticoDAO.create(distributoreautomatico4);
+
+            DistributoreAutomatico distributoreautomatico5 = new DistributoreAutomatico("Napoli", true);
+            distributoreautomaticoDAO.create(distributoreautomatico5);
+
+
+            //------------------------------------------------------------- PERCORRENZA -------------------------------------------------------------
+
+            Percorrenza percorrenza1 = new Percorrenza(12.13);
+            percorrenzaDAO.create(percorrenza1);
+
+
+            Percorrenza percorrenza2 = new Percorrenza(25.17);
+            percorrenzaDAO.create(percorrenza2);
+
+
+            Percorrenza percorrenza3 = new Percorrenza(45.12);
+            percorrenzaDAO.create(percorrenza3);
+
+
+            Percorrenza percorrenza4 = new Percorrenza(2.17);
+            percorrenzaDAO.create(percorrenza4);
+
+
+            Percorrenza percorrenza5 = new Percorrenza(5.17);
+            percorrenzaDAO.create(percorrenza5);
+
+
+            Percorrenza percorrenza6 = new Percorrenza(24.17);
+            percorrenzaDAO.create(percorrenza6);
+
+
+            Percorrenza percorrenza7 = new Percorrenza(1.17);
+            percorrenzaDAO.create(percorrenza7);
+
+
+            Percorrenza percorrenza8 = new Percorrenza(3.57);
+            percorrenzaDAO.create(percorrenza8);
+
+
+            Percorrenza percorrenza9 = new Percorrenza(4.41);
+            percorrenzaDAO.create(percorrenza9);
+
+            Percorrenza percorrenza10 = new Percorrenza(2.29);
+            percorrenzaDAO.create(percorrenza10);
+
+
+            //------------------------------------------------------------- TRATTE -------------------------------------------------------------
+
+            Tratta tratta1 = new Tratta("Messina", "Udine", 10);
+            trattaDAO.create(tratta1);
+
+            Tratta tratta2 = new Tratta("Milano", "Roma", 4.20);
+            trattaDAO.create(tratta2);
+
+            Tratta tratta3 = new Tratta("Roma", "Milano", 4.20);
+            trattaDAO.create(tratta3);
+
+            Tratta tratta4 = new Tratta("Patti", "Palermo", 3.26);
+            trattaDAO.create(tratta4);
+
+            Tratta tratta5 = new Tratta("Palermo", "Patti", 3.26);
+            trattaDAO.create(tratta5);
+
+            Tratta tratta6 = new Tratta("Genova", "Torino", 2.31);
+            trattaDAO.create(tratta6);
+
+            Tratta tratta7 = new Tratta("Torino", "Genova", 2.31);
+            trattaDAO.create(tratta7);
+
+            Tratta tratta8 = new Tratta("Messina", "Catania", 2.51);
+            trattaDAO.create(tratta8);
+
+            Tratta tratta9 = new Tratta("Palermo", "Catania", 3.56);
+            trattaDAO.create(tratta9);
+
+            Tratta tratta10 = new Tratta("Catania", "Roma", 9.51);
+            trattaDAO.create(tratta10);
+
+            Tratta tratta11 = new Tratta("Napoli", "Roma", 6.47);
+            trattaDAO.create(tratta11);
+
+            //------------------------------------------------------------- MEZZI -------------------------------------------------------------
+
+            //-----CREO AUTOBUS ----
+            Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, percorrenza1);
+            mezzoDAO.createMezzo(autobus1);
+
+            Mezzo autobus2 = new Autobus(true, false, bigliettoDAO.findAll(), 25, percorrenza2);
+            mezzoDAO.createMezzo(autobus2);
+
+            Mezzo autobus3 = new Autobus(true, false, bigliettoDAO.findAll(), 25, percorrenza3);
+            mezzoDAO.createMezzo(autobus3);
+
+            Mezzo autobus4 = new Autobus(true, false, bigliettoDAO.findAll(), 25, percorrenza4);
+            mezzoDAO.createMezzo(autobus4);
+
+            Mezzo autobus5 = new Autobus(true, false, bigliettoDAO.findAll(), 25, percorrenza5);
+            mezzoDAO.createMezzo(autobus5);
+
+
+            //-----CREO TRAM ----
+            Mezzo tram1 = new Tram(true, false, bigliettoDAO.findAll(), 180, percorrenza6);
+            mezzoDAO.createMezzo(tram1);
+
+            Mezzo tram2 = new Tram(true, false, bigliettoDAO.findAll(), 180, percorrenza7);
+            mezzoDAO.createMezzo(tram2);
+
+            Mezzo tram3 = new Tram(true, false, bigliettoDAO.findAll(), 180, percorrenza8);
+            mezzoDAO.createMezzo(tram3);
+
+            Mezzo tram4 = new Tram(true, false, bigliettoDAO.findAll(), 180, percorrenza9);
+            mezzoDAO.createMezzo(tram4);
+
+            Mezzo tram5 = new Tram(true, false, bigliettoDAO.findAll(), 180, percorrenza10);
+            mezzoDAO.createMezzo(tram5);
+
+
+            //------------------------------------------------------------- BIGLIETTO -------------------------------------------------------------
+
+
+            Biglietto biglietto1 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico1, utente1, autobus1);
+            bigliettoDAO.create(biglietto1);
+
+            Biglietto biglietto2 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico2, utente2, autobus2);
+            bigliettoDAO.create(biglietto2);
+
+            Biglietto biglietto3 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico3, utente3, autobus3);
+            bigliettoDAO.create(biglietto3);
+
+            Biglietto biglietto4 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico4, utente4, tram1);
+            bigliettoDAO.create(biglietto4);
+
+            Biglietto biglietto5 = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico5, utente5, tram2);
+            bigliettoDAO.create(biglietto5);
+
+
+            //------------------------------------------------------------- PUNTO VENDITA -------------------------------------------------------------
+            PuntoVendita puntovendita1 = new PuntoVendita("Bar Uno", "Torino");
+            puntovenditaDAO.create(puntovendita1);
+
+            PuntoVendita puntovendita2 = new PuntoVendita("Bar due", "Milano");
+            puntovenditaDAO.create(puntovendita2);
+
+            PuntoVendita puntovendita3 = new PuntoVendita("Bar tre", "Catania");
+            puntovenditaDAO.create(puntovendita3);
+
+            PuntoVendita puntovendita4 = new PuntoVendita("Bar quattro", "Patti");
+            puntovenditaDAO.create(puntovendita4);
+
+            PuntoVendita puntovendita5 = new PuntoVendita("Bar cinque", "Roma");
+            puntovenditaDAO.create(puntovendita5);
+
+
+            //------------------------------------------------------------- ABBONAMENTO -------------------------------------------------------------
+            Abbonamento abbonamento1 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera1, utente1, puntovendita1, distributoreautomatico1);
+            abbonamentoDAO.create(abbonamento1);
+
+            Abbonamento abbonamento2 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera2, utente2, puntovendita2, distributoreautomatico2);
+            abbonamentoDAO.create(abbonamento2);
+
+            Abbonamento abbonamento3 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera3, utente3, puntovendita3, distributoreautomatico3);
+            abbonamentoDAO.create(abbonamento3);
+
+            Abbonamento abbonamento4 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera4, utente4, puntovendita4, distributoreautomatico4);
+            abbonamentoDAO.create(abbonamento4);
+
+            Abbonamento abbonamento5 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera5, utente5, puntovendita1, distributoreautomatico5);
+            abbonamentoDAO.create(abbonamento5);
+
+
+            System.out.println("DB POPOLATO ? " + fbdvjkh);
+        } else {
+            System.out.println("DB POPOLATO? " + fbdvjkh);
+        }
 
 
         //-------------------------------------------------------- Start Scanner --------------------------------------------------------
-        Scanner sca = new Scanner(System.in);
 
         System.out.println("\n\t🚌Benvenuto in Trasporti🚃 S.R.L.");
 
@@ -134,18 +291,32 @@ public class Application {
             case 1:
                 System.out.println("🙋sei dentro cliente🙋");
                 //qui dentro tutto quello che può fare un cliente
-                System.out.println("\n<-- ⚙️Utente Menu🔧 -->");
 
-
+                System.out.println("Visualizza Info Utente --> 1️⃣");
+                System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
                 System.out.println("Tratta --> 1️⃣");
                 System.out.println("Distributori --> 3️⃣");
                 System.out.println("Punti vendita --> 4️⃣");
+                int sceltaUtente = sca.nextInt();
+                switch (sceltaUtente) {
+                    case 1:
+                        System.out.println("Info Utente");
+                        System.out.println("Visualizza Utente --> 1️⃣");
+                        System.out.println("Visualizza info Biglietto--> 2️⃣");
+                        System.out.println("Visualizza Info Abbonamento --> 3️⃣");
+                        System.out.println("Visualizza Tratta --> 4️⃣");
+                        int infoUtente = sca.nextInt();
+                        switch (infoUtente) {
+                            case 1:
+                                System.out.println();
+                        }
+                }
 
 
                 break;
             case 2:
-                Admin fs0224 = new Admin("Davide", "Abbadessa");
                 //qui dentro login per verificare se admin è autorizzato
+                Admin fs0224 = new Admin("Davide", "Abbadessa");
                 System.out.println("🔐Inserisci Codice di sicurezza🔐");
                 int codice = sca.nextInt();
                 if (codice == fs0224.getCodice()) {
@@ -154,35 +325,11 @@ public class Application {
 
                     //Lista di cose selezionabili
                     System.out.println(fs0224);
-                    //1) controllare il numero della tessere personale
-//2) può comprare un abbonamento personale    **  (da un ditributore automatico o da negozio fisico)
-//3) può comprare un biglietto personale   **   (da un ditributore automatico o da negozio fisico)
-//4) può visionare un abbonamento personale
-//5) può visionare un biglietto personale
-//6) può vedere le sue info personali
-//7)
-//8) creare utente
-//9) modificare il proprio utente
-//10 ricordarsi di visionare
-
                     System.out.println("\n<-- ⚙️Admin Menu🔧 -->");
-                    System.out.println("Visualizza Info Utente --> 1️⃣");
-                    System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
-                    int sceltaUtente = sca.nextInt();
-                    switch (sceltaUtente) {
-                        case 1:
-                            System.out.println("Info Utente");
-                            System.out.println("Visualizza Utente --> 1️⃣");
-                            System.out.println("Visualizza info Biglietto--> 2️⃣");
-                            System.out.println("Visualizza Info Abbonamento --> 3️⃣");
-                            System.out.println("Visualizza Tratta --> 4️⃣");
-                            int infoUtente = sca.nextInt();
-                            switch (infoUtente) {
-                                case 1:
-                                    System.out.println();
-                            }
-                    }
-
+                    System.out.println("Tratta --> 1️⃣"); //TUTTO OK COMPLETATO✔️
+                    System.out.println("Mezzo --> 2️⃣"); //TUTTO OK COMPLETATO✔️
+                    System.out.println("Distributori --> 3️⃣");
+                    System.out.println("Punti vendita --> 4️⃣");
 
                     //sarà la decisione del admin
                     int dentroAdmin = sca.nextInt();
