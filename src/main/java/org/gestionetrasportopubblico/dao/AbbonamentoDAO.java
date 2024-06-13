@@ -65,9 +65,9 @@ public class AbbonamentoDAO {
         }
     }
 
-    public List<Abbonamento> abbValidiTessera(UUID Id) {
-        TypedQuery<Abbonamento> query = em.createQuery("SELECT s FROM Abbonamento s WHERE s.tessera.numero_tessera = :numero_tessera AND s.tessera.validita > currentDate", Abbonamento.class);
-        query.setParameter("numero_tessera", Id);
+    public List<Abbonamento> abbonamentoValiditaTessera(UUID id) {
+        TypedQuery<Abbonamento> query = em.createQuery("SELECT a FROM Abbonamento a WHERE a.tessera.numero_tessera = :numero_tessera AND a.dataFine > :currentDate", Abbonamento.class);
+        query.setParameter("numero_tessera", id);
         query.setParameter("currentDate", LocalDate.now());
         return query.getResultList();
     }

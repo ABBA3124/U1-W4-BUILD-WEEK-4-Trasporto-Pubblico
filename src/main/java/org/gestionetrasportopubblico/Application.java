@@ -27,7 +27,7 @@ public class Application {
         UtenteDAO utenteDAO = new UtenteDAO(em);
 
         //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
-        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
+        Tessera tessera = new Tessera(LocalDate.now().plusYears(1));
         tesseraDAO.create(tessera);
 //        System.out.println(tessera);
 
@@ -84,7 +84,7 @@ public class Application {
         puntovenditaDAO.create(puntovendita);
 
 //---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
-        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(5), null, null, null, null);
+        Abbonamento abbonamento = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera, utente, puntovendita, null);
         abbonamentoDAO.create(abbonamento);
 //        System.out.println(abbonamentoDAO.findAll());
 //        abbonamentoDAO.deleteFromId(2);
@@ -113,5 +113,7 @@ public class Application {
 
         System.out.println(bigliettoDAO.validitaBiglietto());
         System.out.println(bigliettoDAO.bigliettiConvalidati(UUID.fromString("373f51e4-48e7-4dd7-85a0-93599b6541b7")));
+
+//        System.out.println(abbonamentoDAO.abbonamentoValiditaTessera(UUID.fromString("795453c1-405c-48b1-851e-4cba0e0abc60")));
     }
 }
