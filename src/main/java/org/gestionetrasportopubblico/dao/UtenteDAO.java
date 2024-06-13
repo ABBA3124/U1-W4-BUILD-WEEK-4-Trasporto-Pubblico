@@ -2,6 +2,7 @@ package org.gestionetrasportopubblico.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import org.gestionetrasportopubblico.entities.Utente;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
@@ -61,5 +62,12 @@ public class UtenteDAO {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public Utente findByName(String name) {
+        TypedQuery<Utente> query = em.createQuery("SELECT u FROM Utente u WHERE u.nome = :name", Utente.class);
+        query.setParameter("nome", name);
+        return query.getSingleResult();
+
     }
 }

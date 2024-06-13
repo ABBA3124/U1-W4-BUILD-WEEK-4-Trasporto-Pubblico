@@ -29,14 +29,14 @@ public class Application {
         UtenteDAO utenteDAO = new UtenteDAO(em);
 //
 //        //---------------------------------------------------------------------------------CREO TESSERA---------------------------------------------------------------------------------
-//        Tessera tessera = new Tessera(LocalDate.now().plusYears(1));
+//        Tessera tessera = new Tessera(LocalDate.now().plusYears(2));
 //        tesseraDAO.create(tessera);
 ////        System.out.println(tessera);
 //
 //        //Tessera tesseraDB = tesseraDAO.findById(UUID.fromString("c446a62f-784d-46f6-9cbc-29f77b8a486e"));
 //
 ////---------------------------------------------------------------------------------CREO UTENTI---------------------------------------------------------------------------------
-//        Utente utente = new Utente("Nikita", "Test", tessera);
+//        Utente utente = new Utente("Giacomo", "Test2", tessera);
 //        utenteDAO.create(utente);
 //
 ////        System.out.println(utente);
@@ -73,7 +73,7 @@ public class Application {
 ////            System.out.println(u.getNome() + " " + u.getCognome() + " " + u.getId());
 ////        }
 ////---------------------------------------------------------------------------------Distributore Automatico---------------------------------------------------------------------------------
-//        DistributoreAutomatico distributoreautomatico = new DistributoreAutomatico("Torino", true);
+//        DistributoreAutomatico distributoreautomatico = new DistributoreAutomatico("Roma", false);
 //        distributoreautomaticoDAO.create(distributoreautomatico);
 //
 ////---------------------------------------------------------------------------------Crea Biglietto------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ public class Application {
 ////        bigliettoDAO.create(biglietto);
 //
 ////---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------
-//        PuntoVendita puntovendita = new PuntoVendita("Bar Uno", "Torino");
+//        PuntoVendita puntovendita = new PuntoVendita("Bar asd", "Roma");
 //        puntovenditaDAO.create(puntovendita);
 //
 ////---------------------------------------------------------------------------------Crea Abbonamento------------------------------------------------------------------------------------------
@@ -134,6 +134,12 @@ public class Application {
             case 1:
                 System.out.println("🙋sei dentro cliente🙋");
                 //qui dentro tutto quello che può fare un cliente
+                System.out.println("\n<-- ⚙️Utente Menu🔧 -->");
+
+
+                System.out.println("Tratta --> 1️⃣");
+                System.out.println("Distributori --> 3️⃣");
+                System.out.println("Punti vendita --> 4️⃣");
 
 
                 break;
@@ -148,12 +154,34 @@ public class Application {
 
                     //Lista di cose selezionabili
                     System.out.println(fs0224);
+                    //1) controllare il numero della tessere personale
+//2) può comprare un abbonamento personale    **  (da un ditributore automatico o da negozio fisico)
+//3) può comprare un biglietto personale   **   (da un ditributore automatico o da negozio fisico)
+//4) può visionare un abbonamento personale
+//5) può visionare un biglietto personale
+//6) può vedere le sue info personali
+//7)
+//8) creare utente
+//9) modificare il proprio utente
+//10 ricordarsi di visionare
 
                     System.out.println("\n<-- ⚙️Admin Menu🔧 -->");
-                    System.out.println("Tratta --> 1️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Mezzo --> 2️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Distributori --> 3️⃣");
-                    System.out.println("Punti vendita --> 4️⃣");
+                    System.out.println("Visualizza Info Utente --> 1️⃣");
+                    System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
+                    int sceltaUtente = sca.nextInt();
+                    switch (sceltaUtente) {
+                        case 1:
+                            System.out.println("Info Utente");
+                            System.out.println("Visualizza Utente --> 1️⃣");
+                            System.out.println("Visualizza info Biglietto--> 2️⃣");
+                            System.out.println("Visualizza Info Abbonamento --> 3️⃣");
+                            System.out.println("Visualizza Tratta --> 4️⃣");
+                            int infoUtente = sca.nextInt();
+                            switch (infoUtente) {
+                                case 1:
+                                    System.out.println();
+                            }
+                    }
 
 
                     //sarà la decisione del admin
@@ -437,6 +465,37 @@ public class Application {
                             System.out.println("\n<-- Modale Distributori -->");
                             System.out.println("Visualizza Distributore --> 1️⃣");
                             System.out.println("Modificare Distributore --> 2️⃣"); //attivo o fuori servizio
+                            int scelta = sca.nextInt();
+                            switch (scelta) {
+                                case 1:
+                                    System.out.println("Elenco Distributori:");
+                                    distributoreautomaticoDAO.findAll().stream().forEach(System.out::println);
+                                    break;
+                                case 2:
+                                    System.out.println("Elenco di tutti i distributori: ");
+                                    distributoreautomaticoDAO.findAll().stream().forEach(System.out::println);
+                                    sca.nextLine();
+
+                                    System.out.println("\nInserisci l'ID del distributore da Aggiornare:");
+                                    long idInseritoDistributore = Long.parseLong(sca.nextLine());
+
+
+                                    DistributoreAutomatico distributoreCheStaModificandoLutenteInQuestoMomento = new DistributoreAutomatico();
+
+                                    System.out.println("il distributore è in attivo ? (true or false)");
+                                    Boolean quelloCheInserisce17 = sca.nextBoolean();
+                                    distributoreCheStaModificandoLutenteInQuestoMomento.setAttivo(quelloCheInserisce17);
+
+                                    try {
+                                        //salvataggio nel db
+                                        distributoreautomaticoDAO.update(idInseritoDistributore, distributoreCheStaModificandoLutenteInQuestoMomento);
+
+                                    } catch (NotFoundException e) {
+                                        System.err.println(e.getMessage());
+                                    }
+
+
+                            }
 
 
                             break;
@@ -444,6 +503,16 @@ public class Application {
 
                             System.out.println("\n<-- Modale Punti Vendita -->");
                             System.out.println("Visualizza Punti Vendita --> 1️⃣");
+                            scelta = sca.nextInt();
+                            switch (scelta) {
+                                case 1:
+                                    System.out.println("Elenco Distributori:");
+                                    puntovenditaDAO.findAll().stream().forEach(System.out::println);
+                                    break;
+                                default:
+                                    System.out.println("Inserisci un altro numero coglione");
+                                    break;
+                            }
 
                             break;
                         default:
@@ -474,8 +543,8 @@ public class Application {
 //3) può comprare un biglietto personale   **   (da un ditributore automatico o da negozio fisico)
 //4) può visionare un abbonamento personale
 //5) può visionare un biglietto personale
-//6) può vedere le sue info personale
-//7) può vedere le sue info personale
+//6) può vedere le sue info personali
+//7)
 
 //8) creare utente
 //9) modificare il proprio utente
