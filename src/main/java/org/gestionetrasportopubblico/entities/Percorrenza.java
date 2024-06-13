@@ -62,7 +62,7 @@ public class Percorrenza {
     public String toString() {
         return "Percorrenza{" +
                 "id=" + id +
-                ", mezzi=" + mezzi +
+                
                 ", tratte=" + tratte +
                 ", tempo_effettivo=" + tempo_effettivo +
                 ", numero_percorrenza=" + numero_percorrenza +

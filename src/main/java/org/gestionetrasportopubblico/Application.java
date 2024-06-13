@@ -280,494 +280,437 @@ public class Application {
         //-------------------------------------------------------- Start Scanner --------------------------------------------------------
 
 
-        System.out.println("\n\t🚌Benvenuto in Trasporti🚃 S.R.L.");
+        while (true) {
+            try {
+                System.out.println("\n\t🚌Benvenuto in Trasporti🚃 S.R.L.");
 
-        System.out.println("\nSeleziona Modalità: ");
-        System.out.println("\n🙋Sei un Cliente? digita --> 1️⃣");
-        System.out.println("⚙️Modalità Admin🔧 --> 2️⃣");
-        System.out.println("⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️");
-        int x = sca.nextInt();
+                System.out.println("\nSeleziona Modalità: ");
+                System.out.println("\n🙋Sei un Cliente? digita --> 1️⃣");
+                System.out.println("⚙️Modalità Admin🔧 --> 2️⃣");
+                System.out.println("⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️");
+                int x = sca.nextInt();
+                sca.nextLine(); // Consuma newline rimanente
 
-        switch (x) {
-            //USER CASE
-            case 1:
-                System.out.println("<--🙋Menu Cliente🙋-->");
-                //qui dentro tutto quello che può fare un cliente
-
-                System.out.println("🙋Inserisci il tuo nome Utente🙋");
-                sca.nextLine();
-                String nomeUtenteInserito = sca.nextLine();
-                System.out.println("\n🙋Benvenuto " + nomeUtenteInserito);
-
-
-                System.out.println("Comprare Biglietto --> 1️⃣");
-                System.out.println("Comprare Abbonamento --> 2️⃣");
-                System.out.println("Tratte --> 3️⃣");
-                System.out.println("Visualizza info Biglietto--> 4️⃣");
-                System.out.println("Visualizza Info Abbonamento --> 5️⃣");
-                System.out.println("Visualizza Info Utente --> 6️⃣");
-
-                int sceltaUtente = sca.nextInt();
-                switch (sceltaUtente) {
+                switch (x) {
                     case 1:
-                        //compra biglietto
+                        System.out.println("<--🙋Menu Cliente🙋-->");
+                        // qui dentro tutto quello che può fare un cliente
 
-                        PuntoVendita puntovendita1000 = new PuntoVendita("Ticket di giacomo", "milano");
-                        puntovenditaDAO.create(puntovendita1000);
+                        System.out.println("🙋Inserisci il tuo nome Utente🙋");
+                        String nomeUtenteInserito = sca.nextLine();
+                        System.out.println("\n🙋Benvenuto " + nomeUtenteInserito);
 
-                        Biglietto vfdvf = new Biglietto(LocalDate.now(), true, puntovendita1000, null, utenteDAO.findByName(nomeUtenteInserito), null);
-                        bigliettoDAO.create(vfdvf);
+                        while (true) {
+                            try {
+                                System.out.println("\n<--🙋Menu Cliente🙋-->");
+                                System.out.println("Comprare Biglietto --> 1️⃣");
+                                System.out.println("Comprare Abbonamento --> 2️⃣");
+                                System.out.println("Tratte --> 3️⃣");
+                                System.out.println("Visualizza info Biglietto--> 4️⃣");
+                                System.out.println("Visualizza Info Abbonamento --> 5️⃣");
+                                System.out.println("Visualizza Info Utente --> 6️⃣");
+                                System.out.println("Esci --> 0️⃣");
 
-                        System.out.println("Biglietto acquistato !");
+                                int sceltaUtente = sca.nextInt();
+                                sca.nextLine(); // Consuma newline rimanente
 
-                        break;
-                    case 2:
-                        //compra abbonamento
+                                if (sceltaUtente == 0) {
+                                    break; // Esce dal ciclo del menu utente
+                                }
 
-                        DistributoreAutomatico distributoreAutomatico1000 = new DistributoreAutomatico("Stazione roma termini (london)", true);
-                        distributoreautomaticoDAO.create(distributoreAutomatico1000);
+                                switch (sceltaUtente) {
+                                    case 1:
+                                        // compra biglietto
+                                        PuntoVendita puntovendita1000 = new PuntoVendita("Ticket di giacomo", "milano");
+                                        puntovenditaDAO.create(puntovendita1000);
 
+                                        Biglietto vfdvf = new Biglietto(LocalDate.now(), true, puntovendita1000, null, utenteDAO.findByName(nomeUtenteInserito), null);
+                                        bigliettoDAO.create(vfdvf);
 
-                        Tessera tessera10 = new Tessera(LocalDate.now().plusYears(1));
-                        tesseraDAO.create(tessera10);
+                                        System.out.println("Biglietto acquistato!");
+                                        break;
+                                    case 2:
+                                        // compra abbonamento
+                                        DistributoreAutomatico distributoreAutomatico1000 = new DistributoreAutomatico("Stazione roma termini (london)", true);
+                                        distributoreautomaticoDAO.create(distributoreAutomatico1000);
 
-                        Abbonamento kdbhgscvjhkfbdejh = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now(), LocalDate.now().plusDays(30), tessera10, utenteDAO.findByName(nomeUtenteInserito), null, distributoreAutomatico1000);
-                        abbonamentoDAO.create(kdbhgscvjhkfbdejh);
+                                        Tessera tessera10 = new Tessera(LocalDate.now().plusYears(1));
+                                        tesseraDAO.create(tessera10);
 
-                        System.out.println("Abbonamento acquistato !");
+                                        Abbonamento kdbhgscvjhkfbdejh = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now(), LocalDate.now().plusDays(30), tessera10, utenteDAO.findByName(nomeUtenteInserito), null, distributoreAutomatico1000);
+                                        abbonamentoDAO.create(kdbhgscvjhkfbdejh);
 
-                        break;
-
-                    case 3:
-                        System.out.println("<-- Tratte -->");
-                        System.out.println("Visualizza Tratte --> 1️⃣");
-                        System.out.println("Cerca Tratta per Capolinea --> 2️⃣");
-                        System.out.println("Cerca Tratta per Partenza --> 3️⃣");
-                        int tratteScelte = sca.nextInt();
-                        sca.nextLine();
-                        switch (tratteScelte) {
-                            case 1:
-                                //visualizza tutte le tratte
-                                System.out.println("Elenco di tutte le tratte: ");
-                                trattaDAO.findAll().stream().forEach(System.out::println);
-
-                                break;
-                            case 2:
-                                // cerchiamo per Capoline
-                                System.out.println("Inserisci il capolinea da cercare:");
-                                String cercaPerCapolinea2 = sca.nextLine();
-
-                                List<Tratta> tratte = trattaDAO.findByCapolinea(cercaPerCapolinea2);
-                                tratte.forEach(System.out::println);
-                                break;
-                            case 3:
-                                //cerchiamo per Partenza
-                                System.out.println("Inserisci il capolinea da cercare:");
-                                String cercaPerZoneDiPartenza2 = sca.nextLine();
-
-                                List<Tratta> tratte2 = trattaDAO.findByZoneDiPartenza(cercaPerZoneDiPartenza2);
-                                tratte2.forEach(System.out::println);
-                                break;
-                            default:
-                                System.out.println(tratteScelte + " ❌ " + " Inserisci un numero valido.");
-
+                                        System.out.println("Abbonamento acquistato!");
+                                        break;
+                                    case 3:
+                                        System.out.println("<-- Tratte -->");
+                                        System.out.println("Visualizza Tratte --> 1️⃣");
+                                        System.out.println("Cerca Tratta per Capolinea --> 2️⃣");
+                                        System.out.println("Cerca Tratta per Partenza --> 3️⃣");
+                                        int tratteScelte = sca.nextInt();
+                                        sca.nextLine(); // Consuma newline rimanente
+                                        switch (tratteScelte) {
+                                            case 1:
+                                                // visualizza tutte le tratte
+                                                System.out.println("Elenco di tutte le tratte: ");
+                                                trattaDAO.findAll().forEach(System.out::println);
+                                                break;
+                                            case 2:
+                                                // cerchiamo per Capolinea
+                                                System.out.println("Inserisci il capolinea da cercare:");
+                                                String cercaPerCapolinea2 = sca.nextLine();
+                                                List<Tratta> tratte = trattaDAO.findByCapolinea(cercaPerCapolinea2);
+                                                tratte.forEach(System.out::println);
+                                                break;
+                                            case 3:
+                                                // cerchiamo per Partenza
+                                                System.out.println("Inserisci la zona di partenza da cercare:");
+                                                String cercaPerZoneDiPartenza2 = sca.nextLine();
+                                                List<Tratta> tratte2 = trattaDAO.findByZoneDiPartenza(cercaPerZoneDiPartenza2);
+                                                tratte2.forEach(System.out::println);
+                                                break;
+                                            default:
+                                                System.out.println(tratteScelte + " ❌ " + " Inserisci un numero valido.");
+                                        }
+                                        break;
+                                    case 4:
+                                        bigliettoDAO.bigliettiPerUtente(nomeUtenteInserito).forEach(System.out::println);
+                                        break;
+                                    case 5:
+                                        System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtenteInserito));
+                                        break;
+                                    case 6:
+                                        System.out.println(utenteDAO.findByName(nomeUtenteInserito));
+                                        break;
+                                    default:
+                                        System.out.println(sceltaUtente + " ❌ " + " Inserisci un numero valido.");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Errore: " + e.getMessage());
+                                sca.nextLine(); // Consuma newline rimanente in caso di errore di input
+                            }
                         }
                         break;
 
-                    case 4:
-                        bigliettoDAO.bigliettiPerUtente(nomeUtenteInserito).stream().forEach(System.out::println);
+                    case 2:
+                        // login per verificare se admin è autorizzato
+                        Admin fs0224 = new Admin("Davide", "Abbadessa");
+                        System.out.println("🔐Inserisci Codice di sicurezza🔐");
+
+                        int codice = sca.nextInt();
+                        sca.nextLine(); // Consuma newline rimanente
+                        if (codice == fs0224.getCodice()) {
+                            System.out.println("🔓Password Corretta🔓");
+                            System.out.println(fs0224);
+
+
+                            while (true) {
+                                try {
+                                    // qui dentro tutto quello che può fare un admin
+                                    // Lista di cose selezionabili admin
+                                    System.out.println("\n<-- ⚙️Admin Menu🔧 -->");
+                                    System.out.println("Tratta --> 1️⃣"); // TUTTO OK COMPLETATO✔️
+                                    System.out.println("Mezzo --> 2️⃣"); // TUTTO OK COMPLETATO✔️
+                                    System.out.println("Distributori --> 3️⃣"); // TUTTO OK COMPLETATO✔️
+                                    System.out.println("Punti vendita --> 4️⃣"); // TUTTO OK COMPLETATO✔️
+                                    System.out.println("Esci --> 0️⃣");
+
+                                    int dentroAdmin = sca.nextInt();
+                                    sca.nextLine(); // Consuma newline rimanente
+
+                                    if (dentroAdmin == 0) {
+                                        break; // Esce dal ciclo del menu admin
+                                    }
+
+                                    switch (dentroAdmin) {
+                                        case 1:
+                                            System.out.println("\n<-- Modale Tratta -->");
+                                            System.out.println("Visualizza Tratte --> 1️⃣");
+                                            System.out.println("Crea Tratta --> 2️⃣");
+                                            System.out.println("Modificare Tratta --> 3️⃣");
+                                            System.out.println("Elimina Tratta --> 4️⃣");
+                                            System.out.println("Cerca Tratta per Capolinea --> 5️⃣");
+                                            System.out.println("Cerca Tratta per Partenza --> 6️⃣");
+                                            int tratta = sca.nextInt();
+                                            sca.nextLine();
+
+                                            switch (tratta) {
+                                                case 1:
+                                                    // visualizzazione tutte le tratte
+                                                    System.out.println("Elenco di tutte le tratte: ");
+                                                    trattaDAO.findAll().forEach(System.out::println);
+                                                    break;
+                                                case 2:
+                                                    // Stiamo istanziando una tratta nuova
+                                                    Tratta trattaCheStaCreandoLutenteInQuestoMomento = new Tratta();
+
+                                                    System.out.println("Inserisci la Zona di partenza.");
+                                                    String quelloCheInserisce1 = sca.nextLine();
+                                                    trattaCheStaCreandoLutenteInQuestoMomento.setZone_di_partenza(quelloCheInserisce1);
+
+                                                    System.out.println("Inserisci un Capolinea.");
+                                                    String quelloCheInserisce3 = sca.nextLine();
+                                                    trattaCheStaCreandoLutenteInQuestoMomento.setCapolinea(quelloCheInserisce3);
+
+                                                    System.out.println("Inserisci il Tempo della Tratta h/m");
+                                                    double quelloCheInserisce2 = sca.nextDouble();
+                                                    trattaCheStaCreandoLutenteInQuestoMomento.setTempo_medio(quelloCheInserisce2);
+
+                                                    // salvataggio nel db
+                                                    trattaDAO.create(trattaCheStaCreandoLutenteInQuestoMomento);
+                                                    break;
+                                                case 3:
+                                                    // modifica tratta tramite id
+                                                    System.out.println("Elenco di tutte le tratte: ");
+                                                    trattaDAO.findAll().forEach(System.out::println);
+
+                                                    System.out.println("Inserisci l'ID della tratta da aggiornare:");
+                                                    String idInseritoDaUtente = sca.nextLine();
+                                                    UUID id = UUID.fromString(idInseritoDaUtente);
+
+                                                    Tratta trattaCheStaModificandoLutenteInQuestoMomento = new Tratta();
+
+                                                    System.out.println("Inserisci la nuova Zona di partenza.");
+                                                    String quelloCheInserisce4 = sca.nextLine();
+                                                    trattaCheStaModificandoLutenteInQuestoMomento.setZone_di_partenza(quelloCheInserisce4);
+
+                                                    System.out.println("Inserisci un nuovo Capolinea.");
+                                                    String quelloCheInserisce5 = sca.nextLine();
+                                                    trattaCheStaModificandoLutenteInQuestoMomento.setCapolinea(quelloCheInserisce5);
+
+                                                    System.out.println("Inserisci il nuovo Tempo della Tratta h/m");
+                                                    double quelloCheInserisce6 = sca.nextDouble();
+                                                    trattaCheStaModificandoLutenteInQuestoMomento.setTempo_medio(quelloCheInserisce6);
+
+                                                    try {
+                                                        // salvataggio nel db
+                                                        trattaDAO.update(id, trattaCheStaModificandoLutenteInQuestoMomento);
+                                                    } catch (NotFoundException e) {
+                                                        System.err.println(e.getMessage());
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    // elimina tratta in base id
+                                                    System.out.println("Elenco di tutte le tratte: ");
+                                                    trattaDAO.findAll().forEach(System.out::println);
+
+                                                    String idDeleteDatoUtente = sca.nextLine();
+                                                    trattaDAO.deleteFromId(UUID.fromString(idDeleteDatoUtente));
+                                                    break;
+                                                case 5:
+                                                    // Caso 5 cerchiamo per Capolinea
+                                                    System.out.println("Inserisci il capolinea da cercare:");
+                                                    String cercaPerCapolinea = sca.nextLine();
+                                                    List<Tratta> tratte = trattaDAO.findByCapolinea(cercaPerCapolinea);
+                                                    tratte.forEach(System.out::println);
+                                                    break;
+                                                case 6:
+                                                    // Caso 5 cerchiamo per Partenza
+                                                    System.out.println("Inserisci la zona di partenza da cercare:");
+                                                    String cercaPerZoneDiPartenza = sca.nextLine();
+                                                    List<Tratta> tratte2 = trattaDAO.findByZoneDiPartenza(cercaPerZoneDiPartenza);
+                                                    tratte2.forEach(System.out::println);
+                                                    break;
+                                                default:
+                                                    System.out.println(tratta + " ❌ " + " Inserisci un numero valido.");
+                                            }
+                                            break;
+                                        case 2:
+                                            // ENTRIAMO DENTRO MEZZO QUIIIII
+                                            System.out.println("\n<-- Modale Mezzi -->");
+                                            System.out.println("Visualizza Tutti i Mezzi --> 1️⃣");
+                                            System.out.println("Crea Mezzo --> 2️⃣");
+                                            System.out.println("Modificare Mezzo --> 3️⃣");
+                                            System.out.println("Elimina Mezzo --> 4️⃣");
+                                            System.out.println("Visualizza Mezzi in Manutenzione --> 5️⃣");
+
+                                            int quelloCheInserisceAdminInModaleMezzi = sca.nextInt();
+                                            sca.nextLine();
+
+                                            switch (quelloCheInserisceAdminInModaleMezzi) {
+                                                case 1:
+                                                    // findall
+                                                    System.out.println("Elenco di tutti i Mezzi: ");
+                                                    mezzoDAO.findAll().forEach(System.out::println);
+                                                    break;
+                                                case 2:
+                                                    // crea mezzo (doppio menu)
+                                                    System.out.println("\nSeleziona il mezzo da creare.");
+                                                    System.out.println("Autobus --> 1");
+                                                    System.out.println("Tram --> 2");
+
+                                                    int cheMezzoVuoiCreare = sca.nextInt();
+                                                    sca.nextLine(); // Consuma newline rimanente
+
+                                                    switch (cheMezzoVuoiCreare) {
+                                                        case 1:
+                                                            // crea autobus
+                                                            System.out.println("\n<-- Creazione Autobus Menu -->");
+                                                            System.out.println("Inserisci Capienza");
+                                                            int capienzaAutobus = sca.nextInt();
+                                                            sca.nextLine(); // Consuma newline rimanente
+                                                            Mezzo autobus = new Autobus(true, false, null, capienzaAutobus, null);
+                                                            mezzoDAO.createMezzo(autobus);
+                                                            break;
+                                                        case 2:
+                                                            // crea tram
+                                                            System.out.println("\n<-- Creazione Tram Menu -->");
+                                                            System.out.println("Inserisci Capienza");
+                                                            int capienzaTram = sca.nextInt();
+                                                            sca.nextLine(); // Consuma newline rimanente
+                                                            Mezzo tram1 = new Tram(true, false, null, capienzaTram, null);
+                                                            mezzoDAO.createMezzo(tram1);
+                                                            break;
+                                                        default:
+                                                            System.out.println(cheMezzoVuoiCreare + " ❌ " + " Inserisci un numero valido.");
+                                                    }
+                                                    break;
+                                                case 3:
+                                                    // modifica update mezzo
+                                                    System.out.println("\nSeleziona il mezzo che vuoi modificare");
+                                                    System.out.println("Autobus --> 1");
+                                                    System.out.println("Tram --> 2");
+
+                                                    int mezzoScelta = sca.nextInt();
+                                                    sca.nextLine(); // Consuma newline rimanente
+
+                                                    switch (mezzoScelta) {
+                                                        case 1:
+                                                            System.out.println("Elenco di tutti i mezzi: ");
+                                                            mezzoDAO.findAll().forEach(System.out::println);
+                                                            System.out.println("\nInserisci l'ID dell' Autobus da Aggiornare:");
+                                                            String idInseritoMezzo = sca.nextLine();
+                                                            UUID idAutobus = UUID.fromString(idInseritoMezzo);
+
+                                                            Mezzo autobusDaModificare = mezzoDAO.findById(idAutobus);
+
+                                                            System.out.println("Il mezzo è in servizio? (true o false)");
+                                                            Boolean inServizioAutobus = sca.nextBoolean();
+                                                            autobusDaModificare.setIn_servizio(inServizioAutobus);
+
+                                                            System.out.println("Il mezzo è in manutenzione? (true o false)");
+                                                            Boolean inManutenzioneAutobus = sca.nextBoolean();
+                                                            autobusDaModificare.setIn_manutenzione(inManutenzioneAutobus);
+
+                                                            try {
+                                                                // salvataggio nel db
+                                                                mezzoDAO.update(idAutobus, autobusDaModificare);
+                                                            } catch (NotFoundException e) {
+                                                                System.err.println(e.getMessage());
+                                                            }
+                                                            break;
+                                                        case 2:
+                                                            System.out.println("Elenco di tutti i mezzi: ");
+                                                            mezzoDAO.findAll().forEach(System.out::println);
+                                                            System.out.println("\nInserisci l'ID del Tram da Aggiornare:");
+                                                            String idInseritoTram = sca.nextLine();
+                                                            UUID idTram = UUID.fromString(idInseritoTram);
+
+                                                            Mezzo tramDaModificare = mezzoDAO.findById(idTram);
+
+                                                            System.out.println("Il mezzo è in servizio? (true o false)");
+                                                            Boolean inServizioTram = sca.nextBoolean();
+                                                            tramDaModificare.setIn_servizio(inServizioTram);
+
+                                                            System.out.println("Il mezzo è in manutenzione? (true o false)");
+                                                            Boolean inManutenzioneTram = sca.nextBoolean();
+                                                            tramDaModificare.setIn_manutenzione(inManutenzioneTram);
+
+                                                            try {
+                                                                // salvataggio nel db
+                                                                mezzoDAO.update(idTram, tramDaModificare);
+                                                            } catch (NotFoundException e) {
+                                                                System.err.println(e.getMessage());
+                                                            }
+                                                            break;
+                                                        default:
+                                                            System.out.println(mezzoScelta + " ❌ " + " Inserisci un numero valido.");
+                                                    }
+                                                    break;
+                                                case 4:
+                                                    // elimina mezzo
+                                                    System.out.println("Elenco mezzi: ");
+                                                    mezzoDAO.findAll().forEach(System.out::println);
+                                                    System.out.println("\nElimina mezzo tramite id: ");
+                                                    String idDeleteMezzo = sca.nextLine();
+                                                    mezzoDAO.deleteFromId(UUID.fromString(idDeleteMezzo));
+                                                    break;
+                                                case 5:
+                                                    // visualizza mezzi in manutenzione
+                                                    System.out.println("Elenco tutti i Mezzi in Manutenzione: ");
+                                                    mezzoDAO.mezziManutenzione().forEach(System.out::println);
+                                                    break;
+                                                default:
+                                                    System.out.println(quelloCheInserisceAdminInModaleMezzi + " ❌ " + " Inserisci un numero valido.");
+                                            }
+                                            break;
+                                        case 3:
+                                            // siamo dentro il primo menu admin sezione modale distributori
+                                            System.out.println("\n<-- Modale Distributori -->");
+                                            System.out.println("Visualizza Distributore --> 1️⃣");
+                                            System.out.println("Modificare Distributore --> 2️⃣"); // attivo o fuori servizio
+                                            int sceltaDistributori = sca.nextInt();
+                                            sca.nextLine(); // Consuma newline rimanente
+                                            switch (sceltaDistributori) {
+                                                case 1:
+                                                    System.out.println("Elenco Distributori:");
+                                                    distributoreautomaticoDAO.findAll().forEach(System.out::println);
+                                                    break;
+                                                case 2:
+                                                    System.out.println("Elenco di tutti i distributori: ");
+                                                    distributoreautomaticoDAO.findAll().forEach(System.out::println);
+                                                    System.out.println("\nInserisci l'ID del distributore da Aggiornare:");
+                                                    long idInseritoDistributore = Long.parseLong(sca.nextLine());
+
+                                                    DistributoreAutomatico distributoreDaModificare = distributoreautomaticoDAO.findById(idInseritoDistributore);
+
+                                                    System.out.println("Il distributore è in attivo? (true o false)");
+                                                    Boolean attivo = sca.nextBoolean();
+                                                    distributoreDaModificare.setAttivo(attivo);
+
+                                                    try {
+                                                        // salvataggio nel db
+                                                        distributoreautomaticoDAO.update(idInseritoDistributore, distributoreDaModificare);
+                                                    } catch (NotFoundException e) {
+                                                        System.err.println(e.getMessage());
+                                                    }
+                                                    break;
+                                                default:
+                                                    System.out.println(sceltaDistributori + " ❌ " + " Inserisci un numero valido.");
+                                            }
+                                            break;
+                                        case 4:
+                                            // siamo dentro il primo menu admin sezione modale punti vendita
+
+                                            System.out.println("Elenco Punti Vendita:");
+                                            puntovenditaDAO.findAll().forEach(System.out::println);
+
+                                            break;
+                                        default:
+                                            System.out.println(dentroAdmin + " ❌ " + " Inserisci un numero valido.");
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Errore: " + e.getMessage());
+                                    sca.nextLine(); // Consuma newline rimanente in caso di errore di input
+                                }
+                            }
+                        } else {
+                            System.out.println("❌ Admin Non Autorizzato !!❌");
+                        }
                         break;
-
-                    case 5:
-                        System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtenteInserito));
-                        break;
-
-                    case 6:
-                        System.out.println(utenteDAO.findByName(nomeUtenteInserito));
-                        break;
-
-
                     default:
-                        System.out.println(sceltaUtente + " ❌ " + " Inserisci un numero valido.");
-
+                        System.out.println(x + " ❌ " + " Inserisci un numero valido.");
                 }
-                break;
-
-            // ENTRIMAO IN ADMIN DIOI CANE
-            case 2:
-
-                //qui dentro login per verificare se admin è autorizzato
-                Admin fs0224 = new Admin("Davide", "Abbadessa");
-                System.out.println("🔐Inserisci Codice di sicurezza🔐");
-
-
-                int codice = sca.nextInt();
-                if (codice == fs0224.getCodice()) {
-
-
-                    System.out.println("🔓Password Corretta🔓");
-
-
-                    //qui dentro tutto quello che può fare un admin
-                    //Lista di cose selezionabili admin
-                    System.out.println(fs0224);
-                    System.out.println("\n<-- ⚙️Admin Menu🔧 -->");
-                    System.out.println("Tratta --> 1️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Mezzo --> 2️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Distributori --> 3️⃣"); //TUTTO OK COMPLETATO✔️
-                    System.out.println("Punti vendita --> 4️⃣"); //TUTTO OK COMPLETATO✔️
-
-                    //sarà la decisione del admin
-                    int dentroAdmin = sca.nextInt();
-
-                    switch (dentroAdmin) {
-                        case 1:
-                            System.out.println("\n<-- Modale Tratta -->");
-                            System.out.println("Visualizza Tratte --> 1️⃣");
-                            System.out.println("Crea Tratta --> 2️⃣");
-                            System.out.println("Modificare Tratta --> 3️⃣");
-                            System.out.println("Elimina Tratta --> 4️⃣");
-                            System.out.println("Cerca Tratta per Capolinea --> 5️⃣");
-                            System.out.println("Cerca Tratta per Partenza --> 6️⃣");
-                            int tratta = sca.nextInt();
-                            sca.nextLine();
-
-                            switch (tratta) {
-                                case 1:
-                                    //visualizzazione tutte le tratte
-                                    System.out.println("Elenco di tutte le tratte: ");
-                                    trattaDAO.findAll().stream().forEach(System.out::println);
-
-                                    break;
-                                case 2:
-                                    //Stiamo istanziando una tratta nuova
-                                    Tratta trattaCheStaCreandoLutenteInQuestoMomento = new Tratta();
-
-                                    System.out.println("Inserisci la Zona di partenza.");
-                                    String quelloCheInserisce1 = sca.nextLine();
-                                    trattaCheStaCreandoLutenteInQuestoMomento.setZone_di_partenza(quelloCheInserisce1);
-
-
-                                    System.out.println("Inserisci un Capolinea.");
-                                    String quelloCheInserisce3 = sca.nextLine();
-                                    trattaCheStaCreandoLutenteInQuestoMomento.setCapolinea(quelloCheInserisce3);
-
-                                    System.out.println("Inserisci il Tempo della Tratta h/m");
-                                    double quelloCheInserisce2 = sca.nextDouble();
-                                    trattaCheStaCreandoLutenteInQuestoMomento.setTempo_medio(quelloCheInserisce2);
-
-                                    //salvataggio nel db
-                                    trattaDAO.create(trattaCheStaCreandoLutenteInQuestoMomento);
-
-
-                                    break;
-                                case 3:
-                                    // modifica tratta tramite id
-
-                                    System.out.println("Elenco di tutte le tratte: ");
-                                    trattaDAO.findAll().stream().forEach(System.out::println);
-
-                                    System.out.println("Inserisci l'ID della tratta da aggiornare:");
-                                    String idInseritoDaUtente = sca.nextLine();
-                                    UUID id = UUID.fromString(idInseritoDaUtente);
-
-                                    Tratta trattaCheStaModificandoLutenteInQuestoMomento = new Tratta();
-
-                                    System.out.println("Inserisci la nuova Zona di partenza.");
-                                    String quelloCheInserisce4 = sca.nextLine();
-                                    trattaCheStaModificandoLutenteInQuestoMomento.setZone_di_partenza(quelloCheInserisce4);
-
-                                    System.out.println("Inserisci un nuovo Capolinea.");
-                                    String quelloCheInserisce5 = sca.nextLine();
-                                    trattaCheStaModificandoLutenteInQuestoMomento.setCapolinea(quelloCheInserisce5);
-
-                                    System.out.println("Inserisci il nuovo Tempo della Tratta h/m");
-                                    double quelloCheInserisce6 = sca.nextDouble();
-                                    trattaCheStaModificandoLutenteInQuestoMomento.setTempo_medio(quelloCheInserisce6);
-
-                                    try {
-                                        //salvataggio nel db
-                                        trattaDAO.update(id, trattaCheStaModificandoLutenteInQuestoMomento);
-
-                                    } catch (NotFoundException e) {
-                                        System.err.println(e.getMessage());
-                                    }
-
-                                    break;
-                                case 4:
-                                    // elimina tratta in base id
-                                    System.out.println("Elenco di tutte le tratte: ");
-                                    trattaDAO.findAll().stream().forEach(System.out::println);
-
-                                    String idDeleteDatoUtente = sca.nextLine();
-
-                                    trattaDAO.deleteFromId(UUID.fromString(idDeleteDatoUtente));
-
-
-                                    break;
-                                case 5:
-                                    //Caso 5 cerchiamo per Capoline
-                                    System.out.println("Inserisci il capolinea da cercare:");
-                                    String cercaPerCapolinea = sca.nextLine();
-
-                                    List<Tratta> tratte = trattaDAO.findByCapolinea(cercaPerCapolinea);
-                                    tratte.forEach(System.out::println);
-                                    break;
-                                case 6:
-                                    // Caso 5 cerchiamo per Partenza
-                                    System.out.println("Inserisci il capolinea da cercare:");
-                                    String cercaPerZoneDiPartenza = sca.nextLine();
-
-                                    List<Tratta> tratte2 = trattaDAO.findByZoneDiPartenza(cercaPerZoneDiPartenza);
-                                    tratte2.forEach(System.out::println);
-                                    break;
-                                default:
-                                    System.out.println(tratta + " ❌ " + " Inserisci un numero valido.");
-                            }
-
-
-                            break;
-                        case 2:
-                            //ENTRIAMO DENTRO MEZZO QUIIIII
-                            System.out.println("\n<-- Modale Mezzi -->");
-                            System.out.println("Visualizza Tutti i Mezzi --> 1️⃣");
-                            System.out.println("Crea Mezzo --> 2️⃣");
-                            System.out.println("Modificare Mezzo --> 3️⃣");
-                            System.out.println("Elimina Mezzo --> 4️⃣");
-                            System.out.println("Visualizza Mezzi in Manutenzione --> 5️⃣");
-
-
-                            int quelloCheInserisceAdminInModaleMezzi = sca.nextInt();
-                            sca.nextLine();
-
-                            switch (quelloCheInserisceAdminInModaleMezzi) {
-                                case 1:
-                                    //findall
-                                    System.out.println("Elenco di tutti i Mezzi: ");
-                                    mezzoDAO.findAll().stream().forEach(System.out::println);
-
-                                    break;
-                                case 2:
-
-                                    //crea mezzo (doppio menu)
-                                    System.out.println("\nSeleziona il mezzo da creare.");
-                                    System.out.println("Autobus --> 1");
-                                    System.out.println("Tram --> 2");
-
-                                    int cheMezzoVuoiCreare = sca.nextInt();
-
-                                    switch (cheMezzoVuoiCreare) {
-                                        case 1:
-                                            //crea autobus
-                                            System.out.println("\n<-- Creazione Autobus Menu -->");
-
-                                            System.out.println("Inserisci Capienza");
-                                            int capienzaAutobus = sca.nextInt();
-                                            Mezzo autobus = new Autobus(true, false, null, capienzaAutobus, null);
-                                            mezzoDAO.createMezzo(autobus);
-
-                                            break;
-                                        case 2:
-                                            //crea tram
-
-                                            System.out.println("\n<-- Creazione Tram Menu -->");
-
-                                            System.out.println("Inserisci Capienza");
-                                            int capienzaTram = sca.nextInt();
-                                            Mezzo tram1 = new Tram(true, false, null, capienzaTram, null);
-                                            mezzoDAO.createMezzo(tram1);
-
-
-                                            break;
-
-
-                                        default:
-                                            System.out.println(cheMezzoVuoiCreare + " ❌ " + " Inserisci un numero valido.");
-                                    }
-
-
-                                    break;
-                                case 3:
-                                    //modifica update mezzo
-
-                                    System.out.println("\nSeleziona il mezzo che vuoi modificare");
-
-                                    System.out.println("Autobus --> 1");
-                                    System.out.println("Tram --> 2");
-
-                                    int dioPorco = sca.nextInt();
-
-                                    switch (dioPorco) {
-                                        case 1:
-
-                                            System.out.println("Elenco di tutti i mezzi: ");
-                                            mezzoDAO.findAll().stream().forEach(System.out::println);
-                                            sca.nextLine();
-
-                                            System.out.println("\nInserisci l'ID dell' Autobus da Aggiornare:");
-                                            String idInseritoMezzo = sca.nextLine();
-                                            UUID id = UUID.fromString(idInseritoMezzo);
-
-                                            Mezzo MezzoCheStaModificandoLutenteInQuestoMomento = new Autobus();
-
-                                            System.out.println("il mezzo è in servizio ? (true or false)");
-                                            Boolean quelloCheInserisce10 = sca.nextBoolean();
-                                            MezzoCheStaModificandoLutenteInQuestoMomento.setIn_servizio(quelloCheInserisce10);
-
-                                            System.out.println("il mezzo è in manutenzione ? (true or false).");
-                                            Boolean quelloCheInserisce11 = sca.nextBoolean();
-                                            MezzoCheStaModificandoLutenteInQuestoMomento.setIn_manutenzione(quelloCheInserisce11);
-
-
-                                            try {
-                                                //salvataggio nel db
-                                                mezzoDAO.update(id, MezzoCheStaModificandoLutenteInQuestoMomento);
-
-                                            } catch (NotFoundException e) {
-                                                System.err.println(e.getMessage());
-                                            }
-
-
-                                            break;
-                                        case 2:
-
-                                            System.out.println("Elenco di tutti i mezzi: ");
-                                            mezzoDAO.findAll().stream().forEach(System.out::println);
-                                            sca.nextLine();
-
-                                            System.out.println("\nInserisci l'ID del Tram da Aggiornare:");
-                                            String idInseritoTram = sca.nextLine();
-                                            UUID id1 = UUID.fromString(idInseritoTram);
-
-                                            Mezzo TramCheStaModificandoLutenteInQuestoMomento = new Tram();
-
-                                            System.out.println("il mezzo è in servizio ? (true or false)");
-                                            Boolean quelloCheInserisce15 = sca.nextBoolean();
-                                            TramCheStaModificandoLutenteInQuestoMomento.setIn_servizio(quelloCheInserisce15);
-
-                                            System.out.println("il mezzo è in manutenzione ? (true or false).");
-                                            Boolean quelloCheInserisce16 = sca.nextBoolean();
-                                            TramCheStaModificandoLutenteInQuestoMomento.setIn_manutenzione(quelloCheInserisce16);
-
-
-                                            try {
-                                                //salvataggio nel db
-                                                mezzoDAO.update(id1, TramCheStaModificandoLutenteInQuestoMomento);
-
-                                            } catch (NotFoundException e) {
-                                                System.err.println(e.getMessage());
-                                            }
-
-                                            break;
-                                        default:
-                                            System.out.println(dioPorco + " ❌ " + " Inserisci un numero valido.");
-
-                                    }
-
-
-                                    break;
-                                case 4:
-                                    //elimina mezzo
-
-
-                                    System.out.println("Elenco mezzi: ");
-                                    mezzoDAO.findAll().stream().forEach(System.out::println);
-                                    System.out.println("\nElimina mezzo tramite id: ");
-
-                                    String idDeleteMezzo = sca.nextLine();
-                                    mezzoDAO.deleteFromId(UUID.fromString(idDeleteMezzo));
-                                    break;
-
-                                case 5:
-                                    //visualizza mezzi in manutenzione
-
-                                    System.out.println("Elenco tutti i Mezzi in Manutenzione: ");
-                                    mezzoDAO.mezziManutenzione().stream().forEach(System.out::println);
-
-                                    break;
-
-                                default:
-                                    System.out.println(quelloCheInserisceAdminInModaleMezzi + " ❌ " + " Inserisci un numero valido.");
-
-                            }
-
-
-                            break;
-                        case 3:
-                            // siamo dentro il primo menu admin sezione modale distributori
-                            System.out.println("\n<-- Modale Distributori -->");
-                            System.out.println("Visualizza Distributore --> 1️⃣");
-                            System.out.println("Modificare Distributore --> 2️⃣"); //attivo o fuori servizio
-                            int scelta = sca.nextInt();
-                            switch (scelta) {
-                                case 1:
-                                    System.out.println("Elenco Distributori:");
-                                    distributoreautomaticoDAO.findAll().stream().forEach(System.out::println);
-                                    break;
-                                case 2:
-                                    System.out.println("Elenco di tutti i distributori: ");
-                                    distributoreautomaticoDAO.findAll().stream().forEach(System.out::println);
-                                    sca.nextLine();
-
-                                    System.out.println("\nInserisci l'ID del distributore da Aggiornare:");
-                                    long idInseritoDistributore = Long.parseLong(sca.nextLine());
-
-
-                                    DistributoreAutomatico distributoreCheStaModificandoLutenteInQuestoMomento = new DistributoreAutomatico();
-
-                                    System.out.println("il distributore è in attivo ? (true or false)");
-                                    Boolean quelloCheInserisce17 = sca.nextBoolean();
-                                    distributoreCheStaModificandoLutenteInQuestoMomento.setAttivo(quelloCheInserisce17);
-
-                                    try {
-                                        //salvataggio nel db
-                                        distributoreautomaticoDAO.update(idInseritoDistributore, distributoreCheStaModificandoLutenteInQuestoMomento);
-
-                                    } catch (NotFoundException e) {
-                                        System.err.println(e.getMessage());
-                                    }
-
-
-                            }
-
-
-                            break;
-                        case 4:
-                            // siamo dentro il primo menu admin sezione modale punti vendita
-
-                            System.out.println("\n<-- Modale Punti Vendita -->");
-                            System.out.println("Visualizza Punti Vendita --> 1️⃣");
-                            scelta = sca.nextInt();
-                            switch (scelta) {
-                                case 1:
-                                    System.out.println("Elenco Distributori:");
-                                    puntovenditaDAO.findAll().stream().forEach(System.out::println);
-                                    break;
-                                default:
-                                    System.out.println("Inserisci un altro numero coglione");
-                                    break;
-                            }
-
-                            break;
-                        default:
-                            System.out.println(dentroAdmin + " ❌ " + " Inserisci un numero valido.");
-
-                    }
-
-
-                } else {
-                    System.out.println("❌ Admin Non Autorizzato !!❌");
-                    //nota RICORDIAMOCI DI INSERIRLO NEL WHILE COSI RESTARTA
-                }
-                break;
-
-
-            default:
-                //nota RICORDIAMOCI DI INSERIRLO NEL WHILE COSI RESTARTA
-                System.out.println(x + " ❌ " + " Inserisci un numero valido.");
+            } catch (Exception e) {
+                System.out.println("Errore: " + e.getMessage());
+                sca.nextLine(); // Consuma newline rimanente in caso di errore di input
+            }
         }
 
-
+        // Chiusura delle risorse
+        // em.close();
+        // emf.close();
+        // sca.close();
     }
 }
 //------------------COSA PUò FARE UN UTENTE ------------------
