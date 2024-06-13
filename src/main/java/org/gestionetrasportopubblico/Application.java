@@ -35,8 +35,8 @@ public class Application {
 
         System.out.println("Popolo il db ? (true or false) ");
 
-        boolean fbdvjkh = sca.nextBoolean();
-        //boolean fbdvjkh = false;
+        //boolean fbdvjkh = sca.nextBoolean();
+        boolean fbdvjkh = false;
 
         if (fbdvjkh == true) {
             System.out.println("hai selezionato " + fbdvjkh);
@@ -73,19 +73,19 @@ public class Application {
 
 
             //------------------------------------------------------------- UTENTI -------------------------------------------------------------
-            Utente utente1 = new Utente("Davide", "Abbadessa", tessera1);
+            Utente utente1 = new Utente("davide", "Abbadessa", tessera1);
             utenteDAO.create(utente1);
 
-            Utente utente2 = new Utente("Nikita", "Ivanov", tessera2);
+            Utente utente2 = new Utente("nikita", "Ivanov", tessera2);
             utenteDAO.create(utente2);
 
-            Utente utente3 = new Utente("Emanuele", "Pezzato", tessera3);
+            Utente utente3 = new Utente("emanuele", "Pezzato", tessera3);
             utenteDAO.create(utente3);
 
-            Utente utente4 = new Utente("Luca", "Nardi", tessera4);
+            Utente utente4 = new Utente("luca", "Nardi", tessera4);
             utenteDAO.create(utente4);
 
-            Utente utente5 = new Utente("Riccardo", "Gulin", tessera5);
+            Utente utente5 = new Utente("riccardo", "Gulin", tessera5);
             utenteDAO.create(utente5);
 
 
@@ -300,8 +300,14 @@ public class Application {
         switch (x) {
             //USER CASE
             case 1:
-                System.out.println("🙋sei dentro cliente🙋");
+                System.out.println("<--🙋Menu Cliente🙋-->");
                 //qui dentro tutto quello che può fare un cliente
+
+                System.out.println("🙋Inserisci il tuo nome Utente🙋");
+                sca.nextLine();
+                String nomeUtenteInserito = sca.nextLine();
+                System.out.println("\n🙋Benvenuto " + nomeUtenteInserito);
+
 
                 System.out.println("Visualizza Info Utente --> 1️⃣");
                 System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
@@ -318,20 +324,20 @@ public class Application {
                         sca.nextLine();
                         switch (infoUtente) {
                             case 1:
-                                System.out.println("Inserisci il tuo nome:");
-                                String nomeUtente = sca.nextLine();
-                                System.out.println(utenteDAO.findByName(nomeUtente));
+//                                System.out.println("Inserisci il tuo nome:");
+//                                String nomeUtente = sca.nextLine();
+                                System.out.println(utenteDAO.findByName(nomeUtenteInserito));
                                 break;
                             case 2:
-                                System.out.println("Inserisci il tuo nome:");
-                                nomeUtente = sca.nextLine();
-                                bigliettoDAO.bigliettiPerUtente(nomeUtente).stream().forEach(System.out::println);
+//                                System.out.println("Inserisci il tuo nome:");
+//                                nomeUtenteInserito = sca.nextLine();
+                                bigliettoDAO.bigliettiPerUtente(nomeUtenteInserito).stream().forEach(System.out::println);
 
                                 break;
                             case 3:
-                                System.out.println("Inserisci il tuo nome:");
-                                nomeUtente = sca.nextLine();
-                                System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtente));
+//                                System.out.println("Inserisci il tuo nome:");
+//                                nomeUtente = sca.nextLine();
+                                System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtenteInserito));
 
 
                             default:

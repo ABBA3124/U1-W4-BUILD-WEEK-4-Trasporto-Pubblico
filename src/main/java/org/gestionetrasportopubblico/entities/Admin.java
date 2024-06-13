@@ -6,7 +6,7 @@ public class Admin {
     private String cognome;
     private String id_admin = "FS0224";
     private String livello = "Livello: 5 (MASTER)";
-    private int codice;
+    private int codice = 1234;
 
 
     public Admin() {
