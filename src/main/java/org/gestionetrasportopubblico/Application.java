@@ -279,6 +279,16 @@ public class Application {
 
         //-------------------------------------------------------- Start Scanner --------------------------------------------------------
 
+
+//        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, null);
+//        mezzoDAO.createMezzo(autobus1);
+
+        Mezzo mezzo = mezzoDAO.findById(UUID.fromString("0a718917-01fc-425d-905e-f58e7a99e098"));
+
+
+//        Biglietto biglietto1 = new Biglietto(LocalDate.now().plusDays(2), true, null, distributoreautomaticoDAO.findById(2), utenteDAO.findByName("Giacomo"), mezzo);
+//        bigliettoDAO.create(biglietto1);
+
         System.out.println("\n\t🚌Benvenuto in Trasporti🚃 S.R.L.");
 
         System.out.println("\nSeleziona Modalità: ");
@@ -288,15 +298,14 @@ public class Application {
         int x = sca.nextInt();
 
         switch (x) {
+            //USER CASE
             case 1:
                 System.out.println("🙋sei dentro cliente🙋");
                 //qui dentro tutto quello che può fare un cliente
 
                 System.out.println("Visualizza Info Utente --> 1️⃣");
                 System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
-                System.out.println("Tratta --> 1️⃣");
-                System.out.println("Distributori --> 3️⃣");
-                System.out.println("Punti vendita --> 4️⃣");
+
                 int sceltaUtente = sca.nextInt();
                 switch (sceltaUtente) {
                     case 1:
@@ -306,9 +315,27 @@ public class Application {
                         System.out.println("Visualizza Info Abbonamento --> 3️⃣");
                         System.out.println("Visualizza Tratta --> 4️⃣");
                         int infoUtente = sca.nextInt();
+                        sca.nextLine();
                         switch (infoUtente) {
                             case 1:
-                                System.out.println();
+                                System.out.println("Inserisci il tuo nome:");
+                                String nomeUtente = sca.nextLine();
+                                System.out.println(utenteDAO.findByName(nomeUtente));
+                                break;
+                            case 2:
+                                System.out.println("Inserisci il tuo nome:");
+                                nomeUtente = sca.nextLine();
+                                bigliettoDAO.bigliettiPerUtente(nomeUtente).stream().forEach(System.out::println);
+
+                                break;
+                            case 3:
+                                System.out.println("Inserisci il tuo nome:");
+                                nomeUtente = sca.nextLine();
+                                System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtente));
+
+
+                            default:
+                                break;
                         }
                 }
 

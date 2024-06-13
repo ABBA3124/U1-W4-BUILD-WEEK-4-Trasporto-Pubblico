@@ -103,7 +103,6 @@ public class Biglietto {
                 ", dataEmissione=" + dataEmissione +
                 ", convalidato=" + convalidato +
                 ", utente=" + utente +
-                ", mezzo=" + mezzo +
                 '}';
     }
 }

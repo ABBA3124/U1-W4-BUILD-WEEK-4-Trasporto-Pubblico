@@ -66,7 +66,7 @@ public class UtenteDAO {
 
     public Utente findByName(String name) {
         TypedQuery<Utente> query = em.createQuery("SELECT u FROM Utente u WHERE u.nome = :name", Utente.class);
-        query.setParameter("nome", name);
+        query.setParameter("name", name);
         return query.getSingleResult();
 
     }

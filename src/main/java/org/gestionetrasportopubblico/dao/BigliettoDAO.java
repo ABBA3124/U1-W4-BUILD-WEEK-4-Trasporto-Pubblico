@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import org.gestionetrasportopubblico.entities.Biglietto;
+import org.gestionetrasportopubblico.entities.Utente;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.util.List;
@@ -73,5 +74,15 @@ public class BigliettoDAO {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(vt) FROM Biglietto vt WHERE vt.convalidato = true AND vt.mezzo.id = :id", Long.class);
         query.setParameter("id", id);
         return query.getSingleResult();
+    }
+
+    public List<Biglietto> bigliettiPerUtente(String nomeUtente) {
+        UtenteDAO ud = new UtenteDAO(em);
+        Utente utenteFromDB = ud.findByName(nomeUtente);
+        UUID idUtente = utenteFromDB.getId();
+        TypedQuery<Biglietto> query = em.createQuery("SELECT b FROM Biglietto b WHERE b.utente.id = :idUtente", Biglietto.class);
+        query.setParameter("idUtente", idUtente);
+        return query.getResultList();
+
     }
 }

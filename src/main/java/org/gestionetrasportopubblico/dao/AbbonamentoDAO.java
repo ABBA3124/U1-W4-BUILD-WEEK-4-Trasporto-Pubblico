@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import org.gestionetrasportopubblico.entities.Abbonamento;
+import org.gestionetrasportopubblico.entities.Utente;
 import org.gestionetrasportopubblico.exceptions.NotFoundException;
 
 import java.time.LocalDate;
@@ -70,6 +71,16 @@ public class AbbonamentoDAO {
         query.setParameter("numero_tessera", id);
         query.setParameter("currentDate", LocalDate.now());
         return query.getResultList();
+    }
+
+    public Abbonamento AbbonamentoPerUtente(String nomeUtente) {
+        UtenteDAO ud = new UtenteDAO(em);
+        Utente utenteFromDB = ud.findByName(nomeUtente);
+        UUID idUtente = utenteFromDB.getId();
+        TypedQuery<Abbonamento> query = em.createQuery("SELECT a FROM Abbonamento a WHERE a.utente.id = :idUtente", Abbonamento.class);
+        query.setParameter("idUtente", idUtente);
+        return query.getSingleResult();
+
     }
 
 
