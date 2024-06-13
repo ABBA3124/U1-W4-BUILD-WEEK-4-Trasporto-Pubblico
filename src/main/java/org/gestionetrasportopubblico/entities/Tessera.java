@@ -55,7 +55,7 @@ public class Tessera {
                 "numero_tessera='" + numero_tessera + '\'' +
                 ", validità=" + validita +
                 ", utente=" + utente +
-                ", abbonamenti=" + abbonamenti +
+                
                 '}';
     }
 }

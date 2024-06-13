@@ -35,8 +35,8 @@ public class Application {
 
         System.out.println("Popolo il db ? (true or false) ");
 
-        //boolean fbdvjkh = sca.nextBoolean();
-        boolean fbdvjkh = false;
+        boolean fbdvjkh = sca.nextBoolean();
+        //boolean fbdvjkh = false;
 
         if (fbdvjkh == true) {
             System.out.println("hai selezionato " + fbdvjkh);
@@ -283,7 +283,7 @@ public class Application {
 //        Mezzo autobus1 = new Autobus(true, false, bigliettoDAO.findAll(), 25, null);
 //        mezzoDAO.createMezzo(autobus1);
 
-        Mezzo mezzo = mezzoDAO.findById(UUID.fromString("0a718917-01fc-425d-905e-f58e7a99e098"));
+        // Mezzo mezzo = mezzoDAO.findById(UUID.fromString("0a718917-01fc-425d-905e-f58e7a99e098"));
 
 
 //        Biglietto biglietto1 = new Biglietto(LocalDate.now().plusDays(2), true, null, distributoreautomaticoDAO.findById(2), utenteDAO.findByName("Giacomo"), mezzo);
