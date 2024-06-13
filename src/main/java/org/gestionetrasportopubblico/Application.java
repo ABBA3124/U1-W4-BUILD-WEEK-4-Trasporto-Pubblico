@@ -75,9 +75,9 @@ public class Application {
         distributoreautomaticoDAO.create(distributoreautomatico);
 
 //---------------------------------------------------------------------------------Crea Biglietto------------------------------------------------------------------------------------------
-        Mezzo mezzo_db = mezzoDAO.findById(UUID.fromString("8ea76113-3016-4a83-8c61-e799e4ea56d9"));
-        Biglietto biglietto = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico, utente, mezzo_db);
-        bigliettoDAO.create(biglietto);
+//        Mezzo mezzo_db = mezzoDAO.findById(UUID.fromString("373f51e4-48e7-4dd7-85a0-93599b6541b7"));
+//        Biglietto biglietto = new Biglietto(LocalDate.now().plusDays(7), true, null, distributoreautomatico, utente, mezzo_db);
+//        bigliettoDAO.create(biglietto);
 
 //---------------------------------------------------------------------------------Crea Punto Vendita------------------------------------------------------------------------------------------
         PuntoVendita puntovendita = new PuntoVendita("Bar Uno", "Torino");
@@ -112,6 +112,6 @@ public class Application {
         mezzoDAO.createMezzo(tram1);
 
         System.out.println(bigliettoDAO.validitaBiglietto());
-        System.out.println(bigliettoDAO.bigliettiConvalidati(UUID.fromString("8ea76113-3016-4a83-8c61-e799e4ea56d9")));
+        System.out.println(bigliettoDAO.bigliettiConvalidati(UUID.fromString("373f51e4-48e7-4dd7-85a0-93599b6541b7")));
     }
 }

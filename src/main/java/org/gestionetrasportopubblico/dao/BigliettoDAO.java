@@ -69,9 +69,9 @@ public class BigliettoDAO {
         return query.getResultList();
     }
 
-    public TypedQuery<Long> bigliettiConvalidati(UUID Id) {
-        TypedQuery<Long> query = em.createQuery("SELECT COUNT(vt) FROM Biglietto vt WHERE vt.convalidato = true AND vt.mezzo_id = :Id", Long.class);
-        query.setParameter("Id", Id);
-        return query;
+    public long bigliettiConvalidati(UUID id) {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(vt) FROM Biglietto vt WHERE vt.convalidato = true AND vt.mezzo.id = :id", Long.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 }
