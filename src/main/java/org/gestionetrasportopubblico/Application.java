@@ -149,37 +149,37 @@ public class Application {
 
             //------------------------------------------------------------- TRATTE -------------------------------------------------------------
 
-            Tratta tratta1 = new Tratta("Messina", "Udine", 10);
+            Tratta tratta1 = new Tratta("messina", "udine", 10);
             trattaDAO.create(tratta1);
 
-            Tratta tratta2 = new Tratta("Milano", "Roma", 4.20);
+            Tratta tratta2 = new Tratta("milano", "roma", 4.20);
             trattaDAO.create(tratta2);
 
-            Tratta tratta3 = new Tratta("Roma", "Milano", 4.20);
+            Tratta tratta3 = new Tratta("roma", "milano", 4.20);
             trattaDAO.create(tratta3);
 
-            Tratta tratta4 = new Tratta("Patti", "Palermo", 3.26);
+            Tratta tratta4 = new Tratta("patti", "palermo", 3.26);
             trattaDAO.create(tratta4);
 
-            Tratta tratta5 = new Tratta("Palermo", "Patti", 3.26);
+            Tratta tratta5 = new Tratta("palermo", "patti", 3.26);
             trattaDAO.create(tratta5);
 
-            Tratta tratta6 = new Tratta("Genova", "Torino", 2.31);
+            Tratta tratta6 = new Tratta("genova", "torino", 2.31);
             trattaDAO.create(tratta6);
 
-            Tratta tratta7 = new Tratta("Torino", "Genova", 2.31);
+            Tratta tratta7 = new Tratta("torino", "genova", 2.31);
             trattaDAO.create(tratta7);
 
-            Tratta tratta8 = new Tratta("Messina", "Catania", 2.51);
+            Tratta tratta8 = new Tratta("messina", "catania", 2.51);
             trattaDAO.create(tratta8);
 
-            Tratta tratta9 = new Tratta("Palermo", "Catania", 3.56);
+            Tratta tratta9 = new Tratta("palermo", "catania", 3.56);
             trattaDAO.create(tratta9);
 
-            Tratta tratta10 = new Tratta("Catania", "Roma", 9.51);
+            Tratta tratta10 = new Tratta("catania", "roma", 9.51);
             trattaDAO.create(tratta10);
 
-            Tratta tratta11 = new Tratta("Napoli", "Roma", 6.47);
+            Tratta tratta11 = new Tratta("napoli", "roma", 6.47);
             trattaDAO.create(tratta11);
 
             //------------------------------------------------------------- MEZZI -------------------------------------------------------------
@@ -286,9 +286,6 @@ public class Application {
         // Mezzo mezzo = mezzoDAO.findById(UUID.fromString("0a718917-01fc-425d-905e-f58e7a99e098"));
 
 
-//        Biglietto biglietto1 = new Biglietto(LocalDate.now().plusDays(2), true, null, distributoreautomaticoDAO.findById(2), utenteDAO.findByName("Giacomo"), mezzo);
-//        bigliettoDAO.create(biglietto1);
-
         System.out.println("\n\t🚌Benvenuto in Trasporti🚃 S.R.L.");
 
         System.out.println("\nSeleziona Modalità: ");
@@ -309,45 +306,68 @@ public class Application {
                 System.out.println("\n🙋Benvenuto " + nomeUtenteInserito);
 
 
-                System.out.println("Visualizza Info Utente --> 1️⃣");
                 System.out.println("Comprare Biglietto/Abbonamento --> 2️⃣");
+                System.out.println("Tratte --> 4️⃣");
+                System.out.println("Visualizza info Biglietto--> 3");
+                System.out.println("Visualizza Info Abbonamento --> 4");
+                System.out.println("Visualizza Info Utente --> 5");
 
                 int sceltaUtente = sca.nextInt();
                 switch (sceltaUtente) {
                     case 1:
-                        System.out.println("Info Utente");
-                        System.out.println("Visualizza Utente --> 1️⃣");
-                        System.out.println("Visualizza info Biglietto--> 2️⃣");
-                        System.out.println("Visualizza Info Abbonamento --> 3️⃣");
-                        System.out.println("Visualizza Tratta --> 4️⃣");
-                        int infoUtente = sca.nextInt();
+                        break;
+
+                    case 2:
+                        System.out.println("<-- Tratte -->");
+                        System.out.println("Visualizza Tratte --> 1️⃣");
+                        System.out.println("Cerca Tratta per Capolinea --> 2");
+                        System.out.println("Cerca Tratta per Partenza --> 3");
+                        int tratteScelte = sca.nextInt();
                         sca.nextLine();
-                        switch (infoUtente) {
+                        switch (tratteScelte) {
                             case 1:
-//                                System.out.println("Inserisci il tuo nome:");
-//                                String nomeUtente = sca.nextLine();
-                                System.out.println(utenteDAO.findByName(nomeUtenteInserito));
+                                //visualizza tutte le tratte
+                                System.out.println("Elenco di tutte le tratte: ");
+                                trattaDAO.findAll().stream().forEach(System.out::println);
+
                                 break;
                             case 2:
-//                                System.out.println("Inserisci il tuo nome:");
-//                                nomeUtenteInserito = sca.nextLine();
-                                bigliettoDAO.bigliettiPerUtente(nomeUtenteInserito).stream().forEach(System.out::println);
+                                // cerchiamo per Capoline
+                                System.out.println("Inserisci il capolinea da cercare:");
+                                String cercaPerCapolinea2 = sca.nextLine();
 
+                                List<Tratta> tratte = trattaDAO.findByCapolinea(cercaPerCapolinea2);
+                                tratte.forEach(System.out::println);
                                 break;
                             case 3:
-//                                System.out.println("Inserisci il tuo nome:");
-//                                nomeUtente = sca.nextLine();
-                                System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtenteInserito));
+                                //cerchiamo per Partenza
+                                System.out.println("Inserisci il capolinea da cercare:");
+                                String cercaPerZoneDiPartenza2 = sca.nextLine();
 
-
-                            default:
+                                List<Tratta> tratte2 = trattaDAO.findByZoneDiPartenza(cercaPerZoneDiPartenza2);
+                                tratte2.forEach(System.out::println);
                                 break;
                         }
+                        break;
+
+                    case 3:
+                        bigliettoDAO.bigliettiPerUtente(nomeUtenteInserito).stream().forEach(System.out::println);
+                        break;
+
+                    case 4:
+                        System.out.println(abbonamentoDAO.AbbonamentoPerUtente(nomeUtenteInserito));
+                        break;
+
+                    case 5:
+                        System.out.println(utenteDAO.findByName(nomeUtenteInserito));
+                        break;
+
+
+                    default:
                 }
-
-
                 break;
             case 2:
+
                 //qui dentro login per verificare se admin è autorizzato
                 Admin fs0224 = new Admin("Davide", "Abbadessa");
                 System.out.println("🔐Inserisci Codice di sicurezza🔐");
