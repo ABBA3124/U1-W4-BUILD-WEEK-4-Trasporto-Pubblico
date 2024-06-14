@@ -22,7 +22,7 @@ public class TrattaDAO {
             transaction.begin();
             em.persist(tratta);
             transaction.commit();
-            System.out.println("Tratta creata con successo, id assegnato è: " + tratta.getId() + " Info tratta: " + " Partenza: " + tratta.getZone_di_partenza() + " capolinea: " + tratta.getCapolinea());
+            System.out.println("Tratta creata con successo, id assegnato è: " + tratta.getId() + "\n Info tratta: " + " Partenza: " + tratta.getZone_di_partenza() + " Capolinea: " + tratta.getCapolinea() + " Tempo mediamente impiegato: " + tratta.getTempo_medio());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -69,7 +69,7 @@ public class TrattaDAO {
 
             em.merge(tratta); // Unisce l'entità modificata
             transaction.commit();
-            System.out.println("Tratta aggiornata con successo, id è rimasto invariato infatti è: " + tratta.getId() + " Riepilogo tratta: " + " -Partenza: " + tratta.getZone_di_partenza() + " -Capolinea: " + tratta.getCapolinea());
+            System.out.println("Tratta aggiornata con successo, id è rimasto invariato infatti è: " + tratta.getId() + "\n Riepilogo tratta: " + " -Partenza: " + tratta.getZone_di_partenza() + " -Capolinea: " + tratta.getCapolinea() + " Tempo mediamente impiegato: " + tratta.getTempo_medio());
 
         } catch (Exception e) {
             if (transaction.isActive()) {

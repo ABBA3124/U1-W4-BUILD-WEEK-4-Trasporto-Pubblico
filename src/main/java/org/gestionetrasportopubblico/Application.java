@@ -16,8 +16,6 @@ public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("U1-W4-BUILD-WEEK-4-Trasporto-Pubblico");
 
     public static <User> void main(String[] args) {
-//        System.out.println("Start build week");
-
         EntityManager em = emf.createEntityManager();
         AbbonamentoDAO abbonamentoDAO = new AbbonamentoDAO(em);
         BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
@@ -35,11 +33,11 @@ public class Application {
 
         System.out.println("Popolo il db ? (true or false) ");
 
-        //boolean fbdvjkh = sca.nextBoolean();
-        boolean fbdvjkh = false;
+        boolean popoloDb = sca.nextBoolean();
+        //boolean popoloDb = false;
 
-        if (fbdvjkh == true) {
-            System.out.println("hai selezionato " + fbdvjkh);
+        if (popoloDb == true) {
+            System.out.println("hai selezionato " + popoloDb);
             //------------------------------------------------------------- TESSERA -------------------------------------------------------------
             Tessera tessera1 = new Tessera(LocalDate.now().plusYears(1));
             tesseraDAO.create(tessera1);
@@ -73,7 +71,7 @@ public class Application {
 
 
             //------------------------------------------------------------- UTENTI -------------------------------------------------------------
-            Utente utente1 = new Utente("davide", "Abbadessa", tessera1);
+            Utente utente1 = new Utente("davide", "Abbadessa", null);
             utenteDAO.create(utente1);
 
             Utente utente2 = new Utente("nikita", "Ivanov", tessera2);
@@ -255,7 +253,7 @@ public class Application {
 
 
             //------------------------------------------------------------- ABBONAMENTO -------------------------------------------------------------
-            Abbonamento abbonamento1 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera1, utente1, puntovendita1, distributoreautomatico1);
+            Abbonamento abbonamento1 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera1, null, puntovendita1, distributoreautomatico1);
             abbonamentoDAO.create(abbonamento1);
 
             Abbonamento abbonamento2 = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now().minusDays(2), LocalDate.now().plusDays(28), tessera2, utente2, puntovendita2, distributoreautomatico2);
@@ -271,9 +269,9 @@ public class Application {
             abbonamentoDAO.create(abbonamento5);
 
 
-            System.out.println("DB POPOLATO ? " + fbdvjkh);
+            System.out.println("DB POPOLATO ! " + popoloDb);
         } else {
-            System.out.println("DB POPOLATO? " + fbdvjkh);
+            System.out.println("DB Non POPOLATO. " + popoloDb);
         }
 
 
@@ -334,11 +332,11 @@ public class Application {
                                         DistributoreAutomatico distributoreAutomatico1000 = new DistributoreAutomatico("Stazione roma termini (london)", true);
                                         distributoreautomaticoDAO.create(distributoreAutomatico1000);
 
-                                        Tessera tessera10 = new Tessera(LocalDate.now().plusYears(1));
-                                        tesseraDAO.create(tessera10);
+                                        Tessera tessera11 = new Tessera(LocalDate.now().plusYears(1));
+                                        tesseraDAO.create(tessera11);
 
-                                        Abbonamento kdbhgscvjhkfbdejh = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now(), LocalDate.now().plusDays(30), tessera10, utenteDAO.findByName(nomeUtenteInserito), null, distributoreAutomatico1000);
-                                        abbonamentoDAO.create(kdbhgscvjhkfbdejh);
+                                        Abbonamento delloScanner = new Abbonamento(TipoAbbonamento.MENSILE, LocalDate.now(), LocalDate.now().plusDays(30), tessera11, utenteDAO.findByName(nomeUtenteInserito), null, distributoreAutomatico1000);
+                                        abbonamentoDAO.create(delloScanner);
 
                                         System.out.println("Abbonamento acquistato!");
                                         break;
@@ -412,7 +410,7 @@ public class Application {
                                     System.out.println("Tratta --> 1️⃣"); // TUTTO OK COMPLETATO✔️
                                     System.out.println("Mezzo --> 2️⃣"); // TUTTO OK COMPLETATO✔️
                                     System.out.println("Distributori --> 3️⃣"); // TUTTO OK COMPLETATO✔️
-                                    System.out.println("Punti vendita --> 4️⃣"); // TUTTO OK COMPLETATO✔️
+                                    System.out.println("Visualizza tutti i Punti vendita --> 4️⃣"); // TUTTO OK COMPLETATO✔️
                                     System.out.println("Esci --> 0️⃣");
 
                                     int dentroAdmin = sca.nextInt();
@@ -493,6 +491,8 @@ public class Application {
                                                     // elimina tratta in base id
                                                     System.out.println("Elenco di tutte le tratte: ");
                                                     trattaDAO.findAll().forEach(System.out::println);
+
+                                                    System.out.println("\nInserisci id della tratta che vuoi eliminare.");
 
                                                     String idDeleteDatoUtente = sca.nextLine();
                                                     trattaDAO.deleteFromId(UUID.fromString(idDeleteDatoUtente));

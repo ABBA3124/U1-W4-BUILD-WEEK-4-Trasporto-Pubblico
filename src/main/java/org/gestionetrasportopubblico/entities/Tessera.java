@@ -54,8 +54,8 @@ public class Tessera {
         return "Tessera{" +
                 "numero_tessera='" + numero_tessera + '\'' +
                 ", validità=" + validita +
-                ", utente=" + utente +
-                
+
+
                 '}';
     }
 }
