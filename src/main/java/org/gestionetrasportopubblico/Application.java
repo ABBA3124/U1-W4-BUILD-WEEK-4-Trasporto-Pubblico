@@ -33,8 +33,8 @@ public class Application {
 
         System.out.println("Popolo il db ? (true or false) ");
 
-        boolean popoloDb = sca.nextBoolean();
-        //boolean popoloDb = false;
+        //boolean popoloDb = sca.nextBoolean();
+        boolean popoloDb = false;
 
         if (popoloDb == true) {
             System.out.println("hai selezionato " + popoloDb);
@@ -216,25 +216,6 @@ public class Application {
             mezzoDAO.createMezzo(tram5);
 
 
-            //------------------------------------------------------------- BIGLIETTO -------------------------------------------------------------
-
-
-            Biglietto biglietto1 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico1, utente1, autobus1);
-            bigliettoDAO.create(biglietto1);
-
-            Biglietto biglietto2 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico2, utente2, autobus2);
-            bigliettoDAO.create(biglietto2);
-
-            Biglietto biglietto3 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico3, utente3, autobus3);
-            bigliettoDAO.create(biglietto3);
-
-            Biglietto biglietto4 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico4, utente4, tram1);
-            bigliettoDAO.create(biglietto4);
-
-            Biglietto biglietto5 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico5, utente5, tram2);
-            bigliettoDAO.create(biglietto5);
-
-
             //------------------------------------------------------------- PUNTO VENDITA -------------------------------------------------------------
             PuntoVendita puntovendita1 = new PuntoVendita("Bar Uno", "Torino");
             puntovenditaDAO.create(puntovendita1);
@@ -250,6 +231,23 @@ public class Application {
 
             PuntoVendita puntovendita5 = new PuntoVendita("Bar cinque", "Roma");
             puntovenditaDAO.create(puntovendita5);
+            //------------------------------------------------------------- BIGLIETTO -------------------------------------------------------------
+
+
+            Biglietto biglietto1 = new Biglietto(LocalDate.now(), true, puntovendita1, distributoreautomatico1, utente1, autobus1);
+            bigliettoDAO.create(biglietto1);
+
+            Biglietto biglietto2 = new Biglietto(LocalDate.now(), true, puntovendita2, distributoreautomatico2, utente2, autobus2);
+            bigliettoDAO.create(biglietto2);
+
+            Biglietto biglietto3 = new Biglietto(LocalDate.now(), true, puntovendita3, distributoreautomatico3, utente3, autobus3);
+            bigliettoDAO.create(biglietto3);
+
+            Biglietto biglietto4 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico4, utente4, tram1);
+            bigliettoDAO.create(biglietto4);
+
+            Biglietto biglietto5 = new Biglietto(LocalDate.now(), true, null, distributoreautomatico5, utente5, tram2);
+            bigliettoDAO.create(biglietto5);
 
 
             //------------------------------------------------------------- ABBONAMENTO -------------------------------------------------------------
